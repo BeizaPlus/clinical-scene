@@ -12,8 +12,9 @@
   <main class="scene">
     <div class="scene-stage" aria-label="Clinical scene">
       <div class="video-layer" id="video-layer">
-        <video id="idle" src="assets/video/idle.mp4" autoplay muted playsinline loop></video>
-        <video id="deterioration" src="assets/video/deterioration.mp4" muted playsinline preload="auto"></video>
+        <video id="active" class="idle-slot is-front" muted playsinline preload="auto"></video>
+        <video id="next" class="idle-slot is-back" muted playsinline preload="auto"></video>
+        <video id="death" src="assets/video/death.mp4" muted playsinline preload="auto"></video>
       </div>
 
       <div class="vitals-strip" aria-label="Patient vitals">
@@ -108,7 +109,7 @@
         <path d="M15 12.9l-3.902 -3.899l-7.513 8.584a2 2 0 1 0 2.827 2.83l8.588 -7.515" />
       </svg>
     </button>
-    <button type="button" class="toolbar-btn" title="Skip forward" aria-label="Skip">
+    <button type="button" class="toolbar-btn" data-action="trigger-death" title="Skip to deterioration" aria-label="Skip to deterioration">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M4 5v14l12 -7l-12 -7" />
         <path d="M20 5l0 14" />

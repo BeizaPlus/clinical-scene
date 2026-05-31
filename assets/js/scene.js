@@ -1,6 +1,15 @@
 (() => {
   'use strict';
 
+  const idleVideos = [
+    'assets/video/breathing_01.mp4',
+    'assets/video/breathing_02.mp4',
+    // drop new files here as they are generated
+  ];
+
+  const DEATH_VIDEO = 'assets/video/death.mp4';
+  const IDLE_CROSSFADE_MS = 800;
+
   const TOTAL_ORDERS = 5;
   const TIMER_START_SEC = 5 * 60;
   const DRIFT_MS = 10_000;
@@ -32,8 +41,9 @@
   const els = {
     timer: document.getElementById('timer'),
     videoLayer: document.getElementById('video-layer'),
-    idleVideo: document.getElementById('idle'),
-    deteriorationVideo: document.getElementById('deterioration'),
+    activeSlot: document.getElementById('active'),
+    nextSlot: document.getElementById('next'),
+    deathVideo: document.getElementById('death'),
     dropZone: document.getElementById('patient-drop'),
     ordersRail: document.getElementById('orders-rail'),
     loseOverlay: document.getElementById('lose-overlay'),
@@ -47,6 +57,16 @@
     },
   };
 
+  let frontSlot = els.activeSlot;
+  let backSlot = els.nextSlot;
+  let lastIdleSrc = '';
+  let idleSwapping = false;
+  let deathTriggered = false;
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
   function randInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
@@ -59,6 +79,103 @@
     const m = Math.floor(sec / 60);
     const s = sec % 60;
     return `${m}:${String(s).padStart(2, '0')}`;
+  }
+
+  function pickIdle(exclude) {
+    const pool = exclude ? idleVideos.filter((src) => src !== exclude) : idleVideos;
+    if (pool.length === 0) return idleVideos[0];
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+
+  function slotSrc(slot) {
+    const attr = slot.getAttribute('src');
+    if (attr) return attr;
+    const url = slot.currentSrc || slot.src;
+    if (!url) return '';
+    try {
+      const path = new URL(url, window.location.href).pathname;
+      return path.startsWith('/') ? path.slice(1) : path;
+    } catch {
+      return url;
+    }
+  }
+
+  function loadSlot(slot, src) {
+    slot.src = src;
+    slot.loop = false;
+    slot.muted = true;
+    slot.playsInline = true;
+    slot.load();
+  }
+
+  function bindFrontEnded() {
+    frontSlot.removeEventListener('ended', onIdleEnded);
+    frontSlot.addEventListener('ended', onIdleEnded);
+  }
+
+  async function crossfadeIdle() {
+    if (idleSwapping || state.phase !== 'playing' || deathTriggered) return;
+    idleSwapping = true;
+
+    try {
+      await backSlot.play().catch(() => {});
+      els.videoLayer.classList.add('idle-crossfade');
+      await sleep(IDLE_CROSSFADE_MS);
+
+      frontSlot.pause();
+      frontSlot.currentTime = 0;
+
+      els.videoLayer.classList.remove('idle-crossfade');
+
+      frontSlot.classList.remove('is-front');
+      frontSlot.classList.add('is-back');
+      backSlot.classList.remove('is-back');
+      backSlot.classList.add('is-front');
+
+      const tmp = frontSlot;
+      frontSlot = backSlot;
+      backSlot = tmp;
+
+      lastIdleSrc = slotSrc(frontSlot);
+      loadSlot(backSlot, pickIdle(lastIdleSrc));
+      bindFrontEnded();
+    } finally {
+      idleSwapping = false;
+    }
+  }
+
+  function onIdleEnded() {
+    if (state.phase !== 'playing' || deathTriggered) return;
+    crossfadeIdle();
+  }
+
+  async function startIdlePool() {
+    idleSwapping = false;
+    deathTriggered = false;
+
+    els.videoLayer.classList.remove('deteriorating', 'idle-crossfade');
+
+    frontSlot = els.activeSlot;
+    backSlot = els.nextSlot;
+    frontSlot.classList.add('is-front');
+    frontSlot.classList.remove('is-back');
+    backSlot.classList.add('is-back');
+    backSlot.classList.remove('is-front');
+
+    lastIdleSrc = pickIdle(null);
+    loadSlot(frontSlot, lastIdleSrc);
+    loadSlot(backSlot, pickIdle(lastIdleSrc));
+    bindFrontEnded();
+
+    await frontSlot.play().catch(() => {});
+  }
+
+  function holdDeathLastFrame() {
+    const video = els.deathVideo;
+    video.pause();
+    if (Number.isFinite(video.duration) && video.duration > 0) {
+      video.currentTime = Math.max(0, video.duration - 0.05);
+    }
   }
 
   function flashVital(el) {
@@ -294,10 +411,18 @@
   }
 
   function triggerDeteriorationVideo() {
+    if (deathTriggered) return;
+    deathTriggered = true;
+
+    frontSlot.pause();
+    backSlot.pause();
+    els.videoLayer.classList.remove('idle-crossfade');
+
+    els.deathVideo.src = DEATH_VIDEO;
+    els.deathVideo.loop = false;
+    els.deathVideo.currentTime = 0;
     els.videoLayer.classList.add('deteriorating');
-    els.idleVideo.pause();
-    els.deteriorationVideo.currentTime = 0;
-    els.deteriorationVideo.play().catch(() => {});
+    els.deathVideo.play().catch(() => {});
   }
 
   function triggerLose() {
@@ -311,6 +436,11 @@
 
     els.loseSubtitle.textContent = `Orders placed: ${state.placedCount}/${TOTAL_ORDERS}`;
     els.loseOverlay.classList.add('visible');
+  }
+
+  function manualTriggerDeath() {
+    if (state.phase !== 'playing') return;
+    triggerLose();
   }
 
   function animateVitalsToNormal(durationMs) {
@@ -335,6 +465,8 @@
     state.phase = 'win';
     clearIntervals();
     document.body.classList.add('game-ended');
+    frontSlot.pause();
+    backSlot.pause();
     els.winOverlay.classList.add('visible');
     animateVitalsToNormal(WIN_ANIM_MS);
   }
@@ -355,11 +487,9 @@
     state.placedCount = 0;
     state.vitals = { hr: 98, spo2: 96, sbp: 142, dbp: 88, rr: 18 };
 
-    els.videoLayer.classList.remove('deteriorating');
-    els.deteriorationVideo.pause();
-    els.deteriorationVideo.currentTime = 0;
-    els.idleVideo.currentTime = 0;
-    els.idleVideo.play().catch(() => {});
+    els.deathVideo.pause();
+    els.deathVideo.currentTime = 0;
+    startIdlePool();
 
     updateTimerDisplay();
     renderVitals();
@@ -371,13 +501,10 @@
   }
 
   function initVideos() {
-    els.idleVideo.loop = true;
-    els.idleVideo.muted = true;
-    els.idleVideo.playsInline = true;
-    els.deteriorationVideo.loop = false;
-    els.deteriorationVideo.muted = true;
-    els.deteriorationVideo.playsInline = true;
-    els.idleVideo.play().catch(() => {});
+    els.deathVideo.muted = true;
+    els.deathVideo.playsInline = true;
+    els.deathVideo.addEventListener('ended', holdDeathLastFrame);
+    startIdlePool();
   }
 
   function wireToolbar() {
@@ -386,6 +513,10 @@
         const action = btn.dataset.action;
         if (action === 'restart') {
           resetCase();
+          return;
+        }
+        if (action === 'trigger-death') {
+          manualTriggerDeath();
           return;
         }
         btn.classList.toggle('active');
