@@ -32,6 +32,7 @@
     intervals: { timer: null, drift: null, beep: null },
     dragging: null,
     ghost: null,
+    touchDrag: null,
     audio: null,
   };
 
@@ -454,6 +455,65 @@
     if (state.secondsLeft <= 0) triggerLose();
   }
 
+  function createDragGhost(label) {
+    cleanupDragGhosts();
+    const ghost = document.createElement('div');
+    ghost.className = 'stack-drag-ghost';
+    ghost.textContent = label;
+    ghost.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(ghost);
+    return ghost;
+  }
+
+  function cleanupDragGhosts() {
+    document.querySelectorAll('.stack-drag-ghost, .order-ghost').forEach((node) => node.remove());
+  }
+
+  function moveDragGhost(x, y) {
+    if (!state.ghost) return;
+    state.ghost.style.left = `${x}px`;
+    state.ghost.style.top = `${y}px`;
+  }
+
+  function isPointerOverPatient(x, y) {
+    const layer = els.videoLayer;
+    if (!layer) return false;
+    const rect = layer.getBoundingClientRect();
+    return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+  }
+
+  function setPatientDropHighlight(active) {
+    els.videoLayer?.classList.toggle('patient-drop-active', active);
+    document.body.classList.toggle('stack-drag-over-patient', active);
+    document.body.style.cursor = active ? 'crosshair' : '';
+  }
+
+  function showPlacementFeedback(label, x, y) {
+    const stage = els.videoLayer?.parentElement;
+    if (!stage) return;
+    const el = document.createElement('div');
+    el.className = 'stack-placement-feedback';
+    el.textContent = `${label} placed`;
+    const sr = stage.getBoundingClientRect();
+    el.style.left = `${x - sr.left}px`;
+    el.style.top = `${y - sr.top}px`;
+    stage.appendChild(el);
+    requestAnimationFrame(() => el.classList.add('is-visible'));
+    setTimeout(() => {
+      el.classList.remove('is-visible');
+      setTimeout(() => el.remove(), 1500);
+    }, 40);
+  }
+
+  function snapStackHome(el) {
+    el.classList.remove('dragging', 'stack-drag-source');
+    el.style.transition = 'transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1)';
+    el.style.transform = '';
+    setTimeout(() => {
+      el.style.transition = '';
+    }, 300);
+  }
+
   function buildOrders() {
     els.ordersRail.innerHTML = '';
     ORDERS.forEach((label, i) => {
@@ -461,72 +521,155 @@
       el.className = 'order-stack';
       el.textContent = label;
       el.dataset.orderId = String(i);
+      el.dataset.orderName = label;
+      el.setAttribute('draggable', 'true');
       el.setAttribute('role', 'button');
       el.setAttribute('tabindex', '0');
-      el.addEventListener('pointerdown', (e) => startDrag(e, el));
+      el.addEventListener('dragstart', (e) => startOrderDrag(e, el));
+      el.addEventListener('dragend', endOrderDrag);
+      el.addEventListener('touchstart', (e) => startOrderTouch(e, el), { passive: false });
       els.ordersRail.appendChild(el);
+    });
+
+    wirePatientDropTarget();
+  }
+
+  function wirePatientDropTarget() {
+    const layer = els.videoLayer;
+    if (!layer || layer.dataset.dropWired === '1') return;
+    layer.dataset.dropWired = '1';
+
+    layer.addEventListener('dragover', (e) => {
+      if (!state.dragging) return;
+      e.preventDefault();
+      setPatientDropHighlight(true);
+    });
+    layer.addEventListener('dragleave', (e) => {
+      if (!state.dragging) return;
+      if (layer.contains(e.relatedTarget)) return;
+      setPatientDropHighlight(false);
+    });
+    layer.addEventListener('drop', (e) => {
+      if (!state.dragging) return;
+      e.preventDefault();
+      setPatientDropHighlight(false);
+      if (isPointerOverPatient(e.clientX, e.clientY)) {
+        completeOrderDrop(e.clientX, e.clientY);
+      } else {
+        cancelOrderDrag();
+      }
     });
   }
 
-  function startDrag(e, el) {
-    if (state.phase !== 'playing' || el.classList.contains('placed')) return;
+  function startOrderDrag(e, el) {
+    if (state.phase !== 'playing' || el.classList.contains('placed')) {
+      e.preventDefault();
+      return;
+    }
     resumeAudio();
-    e.preventDefault();
     state.dragging = el;
-    el.classList.add('dragging');
-    el.setPointerCapture(e.pointerId);
+    el.classList.add('dragging', 'stack-drag-source');
 
-    const ghost = document.createElement('div');
-    ghost.className = 'order-ghost';
-    ghost.textContent = el.textContent;
-    document.body.appendChild(ghost);
-    state.ghost = ghost;
-    moveGhost(e.clientX, e.clientY);
+    const label = el.dataset.orderName || el.textContent.trim();
+    state.ghost = createDragGhost(label);
+    moveDragGhost(e.clientX, e.clientY);
 
-    el.addEventListener('pointermove', onDragMove);
-    el.addEventListener('pointerup', onDragEnd);
-    el.addEventListener('pointercancel', onDragEnd);
+    if (e.dataTransfer) {
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', label);
+      const img = new Image();
+      img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+      e.dataTransfer.setDragImage(img, 0, 0);
+    }
   }
 
-  function moveGhost(x, y) {
-    if (!state.ghost) return;
-    state.ghost.style.left = `${x}px`;
-    state.ghost.style.top = `${y}px`;
+  function startOrderTouch(e, el) {
+    if (state.phase !== 'playing' || el.classList.contains('placed')) return;
+    if (e.touches.length !== 1) return;
+    resumeAudio();
+
+    const touch = e.touches[0];
+    state.dragging = el;
+    state.touchDrag = { startX: touch.clientX, startY: touch.clientY };
+    el.classList.add('dragging', 'stack-drag-source');
+
+    const label = el.dataset.orderName || el.textContent.trim();
+    state.ghost = createDragGhost(label);
+    moveDragGhost(touch.clientX, touch.clientY);
+
+    const onTouchMove = (moveEvent) => {
+      if (!state.dragging || moveEvent.touches.length !== 1) return;
+      moveEvent.preventDefault();
+      const t = moveEvent.touches[0];
+      moveDragGhost(t.clientX, t.clientY);
+      setPatientDropHighlight(isPointerOverPatient(t.clientX, t.clientY));
+    };
+
+    const onTouchEnd = (endEvent) => {
+      document.removeEventListener('touchmove', onTouchMove);
+      document.removeEventListener('touchend', onTouchEnd);
+      document.removeEventListener('touchcancel', onTouchEnd);
+      const t = endEvent.changedTouches[0];
+      setPatientDropHighlight(false);
+      if (t && isPointerOverPatient(t.clientX, t.clientY)) {
+        completeOrderDrop(t.clientX, t.clientY);
+      } else {
+        cancelOrderDrag();
+      }
+    };
+
+    document.addEventListener('touchmove', onTouchMove, { passive: false });
+    document.addEventListener('touchend', onTouchEnd);
+    document.addEventListener('touchcancel', onTouchEnd);
+    e.preventDefault();
   }
 
-  function onDragMove(e) {
-    moveGhost(e.clientX, e.clientY);
-    const rect = els.dropZone.getBoundingClientRect();
-    const over =
-      e.clientX >= rect.left &&
-      e.clientX <= rect.right &&
-      e.clientY >= rect.top &&
-      e.clientY <= rect.bottom;
-    els.dropZone.classList.toggle('drag-over', over);
+  function endOrderDrag(e) {
+    setPatientDropHighlight(false);
+    if (!state.dragging) {
+      cleanupDragGhosts();
+      return;
+    }
+    if (isPointerOverPatient(e.clientX, e.clientY)) {
+      completeOrderDrop(e.clientX, e.clientY);
+    } else {
+      cancelOrderDrag();
+    }
   }
 
-  function onDragEnd(e) {
+  function completeOrderDrop(clientX, clientY) {
     const el = state.dragging;
-    if (!el) return;
+    if (!el || el.classList.contains('placed')) {
+      cancelOrderDrag();
+      return;
+    }
 
-    const rect = els.dropZone.getBoundingClientRect();
-    const dropped =
-      e.clientX >= rect.left &&
-      e.clientX <= rect.right &&
-      e.clientY >= rect.top &&
-      e.clientY <= rect.bottom;
+    const label = el.dataset.orderName || el.textContent.trim();
+    cleanupDragGhosts();
+    el.classList.remove('stack-drag-source');
+    el.classList.add('stack-dismiss-up');
 
-    el.classList.remove('dragging');
-    els.dropZone.classList.remove('drag-over');
-    el.removeEventListener('pointermove', onDragMove);
-    el.removeEventListener('pointerup', onDragEnd);
-    el.removeEventListener('pointercancel', onDragEnd);
+    showPlacementFeedback(label, clientX, clientY);
 
-    state.ghost?.remove();
-    state.ghost = null;
+    setTimeout(() => {
+      placeOrder(el);
+      el.classList.remove('dragging', 'stack-dismiss-up');
+    }, 320);
+
     state.dragging = null;
+    state.ghost = null;
+    state.touchDrag = null;
+    document.body.style.cursor = '';
+  }
 
-    if (dropped && !el.classList.contains('placed')) placeOrder(el);
+  function cancelOrderDrag() {
+    const el = state.dragging;
+    cleanupDragGhosts();
+    if (el) snapStackHome(el);
+    state.dragging = null;
+    state.ghost = null;
+    state.touchDrag = null;
+    setPatientDropHighlight(false);
   }
 
   function placeOrder(el) {
@@ -1026,6 +1169,7 @@
 
   function init() {
     initAudio();
+    cleanupDragGhosts();
     wireAudioUnlock();
     wireAudioStartOverlay();
     tryAutoUnlockAudio();
