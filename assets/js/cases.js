@@ -46,7 +46,16 @@
   function getActiveHpi(caseData = activeCase) {
     if (!caseData) return '';
     if (activeVariant?.hpi) return activeVariant.hpi;
-    return caseData.hpi || '';
+    const hpi = caseData.hpi;
+    if (typeof hpi === 'string' && hpi.trim()) return hpi;
+    if (hpi && typeof hpi === 'object') {
+      const parts = [];
+      if (hpi.reason_for_visit) parts.push(`Reason for visit: ${hpi.reason_for_visit}`);
+      if (hpi.history) parts.push(hpi.history);
+      const joined = parts.filter(Boolean).join('\n\n');
+      if (joined) return joined;
+    }
+    return caseData.case_introduction || '';
   }
 
   function applyActiveVariant(caseData = activeCase) {

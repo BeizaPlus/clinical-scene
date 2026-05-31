@@ -198,12 +198,12 @@ def extract_case_from_image(image_path: Path, model: str, prompt: str = OCR_PROM
         return None, raw
 
 
-def extract_case_with_retry(image_path: Path, model: str) -> tuple[dict | None, str]:
-    ocr, raw_first = extract_case_from_image(image_path, model)
+def extract_case_with_retry(image_path: Path, model: str, prompt: str = OCR_PROMPT) -> tuple[dict | None, str]:
+    ocr, raw_first = extract_case_from_image(image_path, model, prompt=prompt)
     if ocr is not None:
         return ocr, raw_first
 
-    ocr, raw_retry = extract_case_from_image(image_path, model, prompt=OCR_PROMPT + RETRY_SUFFIX)
+    ocr, raw_retry = extract_case_from_image(image_path, model, prompt=prompt + RETRY_SUFFIX)
     combined_raw = raw_first
     if raw_retry:
         combined_raw = f"{raw_first}\n\n--- RETRY ---\n{raw_retry}"

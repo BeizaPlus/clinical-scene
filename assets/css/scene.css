@@ -1296,26 +1296,29 @@ body.stack-drag-over-patient {
   border-radius: 8px;
   cursor: pointer;
   padding: 0;
+  font-size: 0;
+  line-height: 0;
   transition: background 0.15s ease, transform 0.1s ease;
 }
 
 .toolbar-btn:hover { background: rgba(255, 255, 255, 0.06); }
 .toolbar-btn:active { transform: scale(0.95); }
 
-.toolbar-btn svg {
+.toolbar-btn .toolbar-icon {
   width: 24px;
   height: 24px;
   display: block;
-  stroke: #ffffff;
+  flex-shrink: 0;
+  color: #ffffff;
   opacity: 0.6;
   transition: opacity 0.15s ease;
 }
 
-.toolbar-btn:hover svg { opacity: 1; }
-.toolbar-btn.active svg,
-.toolbar-btn.is-amber svg {
+.toolbar-btn:hover .toolbar-icon { opacity: 1; }
+.toolbar-btn.active .toolbar-icon,
+.toolbar-btn.is-amber .toolbar-icon {
   opacity: 1;
-  stroke: #e8b84b;
+  color: #e8b84b;
 }
 
 .game-ended .orders-rail,
