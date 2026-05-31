@@ -95,34 +95,21 @@ def list_breathing_videos() -> list[str]:
     return [name for _, name in files]
 
 
-def update_idle_videos_array() -> None:
-    if not SCENE_JS.is_file():
-        print(f"WARNING: Could not update idleVideos — missing {SCENE_JS}")
+def update_cases_video_lists() -> None:
+    if not CASES_JSON.is_file():
+        print(f"WARNING: Could not update case videos — missing {CASES_JSON}")
         return
 
     breathing_files = list_breathing_videos()
-    lines = [f"    'assets/video/{name}'," for name in breathing_files]
-    if lines:
-        lines.append("    // drop new files here as they are generated")
-        body = "\n".join(lines)
-    else:
-        body = "    // drop new files here as they are generated"
+    payload = json.loads(CASES_JSON.read_text(encoding="utf-8"))
+    for case in payload.get("cases", []):
+        videos = case.setdefault("videos", {})
+        videos["idle"] = breathing_files
+        if (DEST_DIR / "death.mp4").is_file():
+            videos["death"] = "death.mp4"
 
-    replacement = f"  const idleVideos = [\n{body}\n  ];"
-    content = SCENE_JS.read_text(encoding="utf-8")
-    updated, count = re.subn(
-        r"  const idleVideos = \[[\s\S]*?\];",
-        replacement,
-        content,
-        count=1,
-    )
-
-    if count != 1:
-        print("WARNING: Could not update idleVideos array in assets/js/scene.js")
-        return
-
-    SCENE_JS.write_text(updated, encoding="utf-8", newline="\n")
-    print(f"UPDATED: idleVideos array in {SCENE_JS.relative_to(PROJECT_ROOT)}")
+    CASES_JSON.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    print(f"UPDATED: videos.idle lists in {CASES_JSON.relative_to(PROJECT_ROOT)}")
 
 
 def print_summary(breathing_count: int, death_found: bool) -> None:
@@ -167,7 +154,7 @@ def main() -> None:
 
     breathing_count = len(list_breathing_videos())
     death_found = (DEST_DIR / "death.mp4").is_file()
-    update_idle_videos_array()
+    update_cases_video_lists()
     print_summary(breathing_count, death_found)
 
 

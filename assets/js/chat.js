@@ -17,8 +17,10 @@
 
   function chatStorageKey() {
     const caseData = window.ClinicalCases?.getActiveCase();
+    const variant = window.ClinicalCases?.getActiveVariant();
     const id = caseData?.id ?? 'unknown';
-    return `chat_history_case_${id}`;
+    const variantCode = variant?.code ?? 'base';
+    return `chat_history_case_${id}_${variantCode}`;
   }
 
   function loadHistory() {
@@ -198,6 +200,11 @@
     if (chatOpen) renderHistory(loadHistory());
   }
 
+  function onVariantChanged() {
+    sessionId = null;
+    if (chatOpen) renderHistory(loadHistory());
+  }
+
   function initChat() {
     if (!els.panel) return;
 
@@ -211,9 +218,12 @@
       clearHistory,
       confirmClearOnReset,
       onCaseChanged,
+      onVariantChanged,
       open: () => setChatOpen(true),
       close: () => setChatOpen(false),
     };
+
+    window.addEventListener('variant-changed', onVariantChanged);
   }
 
   if (document.readyState === 'loading') {
