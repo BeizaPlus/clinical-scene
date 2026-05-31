@@ -227,6 +227,14 @@
         "screenshots": "case_1/",
         "multicare_case_ids": [],
         "derived_fields": []
+      },
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
       }
     },
     {
@@ -284,7 +292,15 @@
         "pain": "My head hurts a lot."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 3,
@@ -340,7 +356,15 @@
         "pain": "The pain is sharp and it feels like it's getting worse."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings for respiratory, extremities, neuro, skin, musculoskeletal, psych, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings for respiratory, extremities, neuro, skin, musculoskeletal, psych, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 4,
@@ -399,7 +423,15 @@
         "pain": "It feels like a sharp pain in my belly."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 5,
@@ -459,7 +491,15 @@
         "pain": "My head hurts so much, it feels like it's pounding."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 6,
@@ -517,7 +557,15 @@
         "pain": "It hurts when I touch my stomach."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 7,
@@ -575,7 +623,15 @@
         "pain": "I don't have pain, just weakness."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 8,
@@ -637,7 +693,15 @@
         "pain": "It hurts a lot when I try to go."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 9,
@@ -699,7 +763,15 @@
         "pain": "It feels sharp and is mostly on my lower right side."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 10,
@@ -760,7 +832,15 @@
         "pain": "The pain is sharp and comes in waves."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 11,
@@ -818,7 +898,15 @@
         "pain": "It feels sharp and comes in waves."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 12,
@@ -883,7 +971,15 @@
         "pain": "It feels like a burning sensation every time I go to the bathroom."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 13,
@@ -941,7 +1037,15 @@
         "pain": "It feels sharp and is right in the middle of my stomach."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 14,
@@ -1006,7 +1110,15 @@
         "pain": "My arms and legs feel heavy and uncomfortable."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 15,
@@ -1065,7 +1177,15 @@
         "pain": "It feels sharp and gets worse when I breathe."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 16,
@@ -1122,7 +1242,15 @@
         "pain": "It feels like a tight band around my belly."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 17,
@@ -1181,7 +1309,15 @@
         "pain": "I don't have any specific pain, just feel really weak."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 18,
@@ -1243,7 +1379,15 @@
         "pain": "It feels like a sharp pain in my belly."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 19,
@@ -1303,7 +1447,15 @@
         "pain": "It hurts really bad in my lower abdomen."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 20,
@@ -1365,7 +1517,15 @@
         "pain": "I felt a tightness in my chest."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 21,
@@ -1424,7 +1584,15 @@
         "pain": "It feels like a cramp, and it hurts a lot."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 22,
@@ -1482,7 +1650,15 @@
         "pain": "It hurts really bad in my belly."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 23,
@@ -1540,7 +1716,15 @@
         "pain": "It feels like there's pressure in my chest."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 24,
@@ -1582,7 +1766,15 @@
       },
       "incomplete": true,
       "duplicate_screenshot_of": 23,
-      "extraction_notes": "Screenshot file is identical to case 23; re-capture needed."
+      "extraction_notes": "Screenshot file is identical to case 23; re-capture needed.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 25,
@@ -1639,7 +1831,15 @@
         "pain": "It hurt a lot in my stomach."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 26,
@@ -1697,7 +1897,15 @@
         "pain": "It feels like a stabbing pain in my side."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs were not present in the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs were not present in the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 27,
@@ -1740,7 +1948,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 28,
@@ -1797,7 +2013,15 @@
         "pain": "It hurts a lot, especially when I move."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 29,
@@ -1856,7 +2080,15 @@
         "pain": "It feels like a lot of pressure and cramping."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 30,
@@ -1916,7 +2148,15 @@
         "pain": "It feels sharp and throbbing."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 31,
@@ -1973,7 +2213,15 @@
         "pain": "I have this nagging pain in my stomach."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 32,
@@ -2031,7 +2279,15 @@
         "pain": "The pain is sharp and constant."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 33,
@@ -2090,7 +2346,15 @@
         "pain": "I don't have pain, just this weird feeling in my head."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 34,
@@ -2150,7 +2414,15 @@
         "pain": "It feels like a tight band around my head."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 35,
@@ -2209,7 +2481,15 @@
         "pain": "I have a headache and feel really anxious."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 36,
@@ -2267,7 +2547,15 @@
         "pain": "It feels like my head is pounding."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs were not present in the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs were not present in the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 37,
@@ -2310,7 +2598,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 38,
@@ -2369,7 +2665,15 @@
         "pain": "I have some discomfort in my abdomen."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 39,
@@ -2430,7 +2734,15 @@
         "pain": "It hurts right in the middle of my stomach."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs were missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs were missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 40,
@@ -2495,7 +2807,15 @@
         "pain": "It feels sharp and comes and goes."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 41,
@@ -2553,7 +2873,15 @@
         "pain": "I don't have any specific pain, just this overwhelming weakness."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 42,
@@ -2618,7 +2946,15 @@
         "pain": "The pain is sharp and feels like it's burning."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 43,
@@ -2675,7 +3011,15 @@
         "pain": "It feels sharp and throbbing."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 44,
@@ -2732,7 +3076,15 @@
         "pain": "My stomach hurts a lot."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 45,
@@ -2790,7 +3142,15 @@
         "pain": "I feel pressure in my chest."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 46,
@@ -2847,7 +3207,15 @@
         "pain": "My legs feel heavy and tingly."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 47,
@@ -2890,7 +3258,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 48,
@@ -2948,7 +3324,15 @@
         "pain": "It hurts to take a deep breath."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 49,
@@ -2990,7 +3374,15 @@
       },
       "incomplete": true,
       "duplicate_screenshot_of": 48,
-      "extraction_notes": "Screenshot file is identical to case 48; re-capture needed."
+      "extraction_notes": "Screenshot file is identical to case 48; re-capture needed.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 50,
@@ -3048,7 +3440,15 @@
         "pain": "The pain is sharp and only on one side of my head."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 51,
@@ -3107,7 +3507,15 @@
         "pain": "I didn't feel any pain, just confusion."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs were missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs were missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 52,
@@ -3165,7 +3573,15 @@
         "pain": "It feels like a heavy weight on my chest."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 53,
@@ -3208,7 +3624,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 54,
@@ -3269,7 +3693,15 @@
         "pain": "I just want to make sure my baby is okay."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 55,
@@ -3312,7 +3744,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 56,
@@ -3373,7 +3813,15 @@
         "pain": "It hurts a lot, especially when I move."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 57,
@@ -3434,7 +3882,15 @@
         "pain": "It hurts so much in my belly."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 58,
@@ -3493,7 +3949,15 @@
         "pain": "It hurts when I cough."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 59,
@@ -3536,7 +4000,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 60,
@@ -3597,7 +4069,15 @@
         "pain": "It hurts really bad in my side."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 61,
@@ -3655,7 +4135,15 @@
         "pain": "It feels like a tight band around my head."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 62,
@@ -3716,7 +4204,15 @@
         "pain": "I felt a strange sensation before it happened."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 63,
@@ -3774,7 +4270,15 @@
         "pain": "It hurts a lot in my abdomen, especially after eating."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 64,
@@ -3836,7 +4340,15 @@
         "pain": "It hurts a lot in my belly."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 65,
@@ -3879,7 +4391,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 66,
@@ -3936,7 +4456,15 @@
         "pain": "My chest hurts when I cough."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 67,
@@ -3993,7 +4521,15 @@
         "pain": "I feel discomfort sometimes, but it's mostly just the urgency."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 68,
@@ -4054,7 +4590,15 @@
         "pain": "It feels like my legs are heavy and I can't lift them."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 69,
@@ -4107,7 +4651,15 @@
         "pain": "It hurts a lot, especially when I try to walk."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 70,
@@ -4150,7 +4702,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 71,
@@ -4209,7 +4769,15 @@
         "pain": "I have this dull ache in my back that won't go away."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 72,
@@ -4252,7 +4820,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 73,
@@ -4309,7 +4885,15 @@
         "pain": "I don't have physical pain, but this memory issue is really distressing."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 74,
@@ -4369,7 +4953,15 @@
         "pain": "It hurts when I cough."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 75,
@@ -4429,7 +5021,15 @@
         "pain": "It feels like a heavy pressure in my chest."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 76,
@@ -4487,7 +5087,15 @@
         "pain": "My baby seems uncomfortable and fussy."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 77,
@@ -4545,7 +5153,15 @@
         "pain": "It feels like a tight pressure in my chest."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 78,
@@ -4606,7 +5222,15 @@
         "pain": "I have this dull ache in my side that won't go away."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 79,
@@ -4665,7 +5289,15 @@
         "pain": "The pain in my back is sharp and it makes it hard to move."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 80,
@@ -4726,7 +5358,15 @@
         "pain": "It hurts in my belly, and I feel really nauseous."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 81,
@@ -4786,7 +5426,15 @@
         "pain": "It feels like a sharp pain in my belly."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 82,
@@ -4843,7 +5491,15 @@
         "pain": "It hurts in my belly, and I feel like I need to go to the bathroom a lot."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 83,
@@ -4886,7 +5542,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 84,
@@ -4948,7 +5612,15 @@
         "pain": "It hurts in my lower belly."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 85,
@@ -5006,7 +5678,15 @@
         "pain": "I don't have pain, but I'm scared about what this means for my health."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 86,
@@ -5065,7 +5745,15 @@
         "pain": "It hurts when I urinate, and I'm worried about what it means."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 87,
@@ -5124,7 +5812,15 @@
         "pain": "It hurts a lot, especially after I eat."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 88,
@@ -5179,7 +5875,15 @@
         "pain": "Sometimes I feel a sharp pain when I try to go."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 89,
@@ -5242,7 +5946,15 @@
         "pain": "It hurts really bad, especially on my face and butt."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 90,
@@ -5301,7 +6013,15 @@
         "pain": "I feel a tightness in my chest sometimes."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 91,
@@ -5357,7 +6077,15 @@
         "pain": "It doesn't hurt, but I'm worried it might be something bad."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 92,
@@ -5400,7 +6128,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 93,
@@ -5459,7 +6195,15 @@
         "pain": "It hurts a bit in my stomach."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 94,
@@ -5517,7 +6261,15 @@
         "pain": "My joints are aching, especially in my hands and knees."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 95,
@@ -5575,7 +6327,15 @@
         "pain": "It feels like cramping and I'm worried."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 96,
@@ -5636,7 +6396,15 @@
         "pain": "My stomach hurts a lot."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 97,
@@ -5701,7 +6469,15 @@
         "pain": "The pain is sharp and makes me anxious."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 98,
@@ -5757,7 +6533,15 @@
         "pain": "It's a sharp pain in my lower back."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 99,
@@ -5814,7 +6598,15 @@
         "pain": "It feels like a sharp pain in my lower back."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 100,
@@ -5871,7 +6663,15 @@
         "pain": "It feels uncomfortable and itchy down there."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 101,
@@ -5934,7 +6734,15 @@
         "pain": "It feels like my throat is closing up."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 102,
@@ -5993,7 +6801,15 @@
         "pain": "I don't have any specific pain, just this overwhelming weakness."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 103,
@@ -6036,7 +6852,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 104,
@@ -6094,7 +6918,15 @@
         "pain": "It feels sharp and sometimes it radiates down my legs."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 105,
@@ -6151,7 +6983,15 @@
         "pain": "It hurts a lot, especially on my left side."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 106,
@@ -6208,7 +7048,15 @@
         "pain": "I have a dull ache all over my body."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 107,
@@ -6267,7 +7115,15 @@
         "pain": "It's like a heavy weight on my chest."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 108,
@@ -6310,7 +7166,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 109,
@@ -6371,7 +7235,15 @@
         "pain": "I don't feel pain, just really confused."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 110,
@@ -6433,7 +7305,15 @@
         "pain": "It doesn't hurt, but it looks really bad."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 111,
@@ -6488,7 +7368,15 @@
         "pain": "It feels like there's pressure in my chest."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 112,
@@ -6546,7 +7434,15 @@
         "pain": "I feel really confused and scared."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 113,
@@ -6605,7 +7501,15 @@
         "pain": "I feel cold and weak."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 114,
@@ -6648,7 +7552,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 115,
@@ -6706,7 +7618,15 @@
         "pain": "I feel like my head is spinning and my heart is racing."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 116,
@@ -6749,7 +7669,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 117,
@@ -6792,7 +7720,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 118,
@@ -6853,7 +7789,15 @@
         "pain": "It feels like a deep ache in my muscles."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 119,
@@ -6909,7 +7853,15 @@
         "pain": "It really hurts when I swallow."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 120,
@@ -6964,7 +7916,15 @@
         "pain": "It feels like my throat is on fire."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 121,
@@ -7007,7 +7967,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 122,
@@ -7064,7 +8032,15 @@
         "pain": "It hurts all over my body, especially where the rash is."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 123,
@@ -7119,7 +8095,15 @@
         "pain": "It hurts a lot, especially when I try to walk."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 124,
@@ -7162,7 +8146,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 125,
@@ -7220,7 +8212,15 @@
         "pain": "It feels like a heavy weight on my chest."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 126,
@@ -7283,7 +8283,15 @@
         "pain": "It feels like a heavy weight on my chest."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 127,
@@ -7342,7 +8350,15 @@
         "pain": "My gums bleed when I brush my teeth."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 128,
@@ -7385,7 +8401,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 129,
@@ -7428,7 +8452,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 130,
@@ -7485,7 +8517,15 @@
         "pain": "It hurts to breathe deeply."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 131,
@@ -7528,7 +8568,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 132,
@@ -7571,7 +8619,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 133,
@@ -7632,7 +8688,15 @@
         "pain": "The pain is sharp and makes it hard to move."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 134,
@@ -7689,7 +8753,15 @@
         "pain": "It feels sharp and throbbing."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 135,
@@ -7748,7 +8820,15 @@
         "pain": "My muscles feel heavy and I can't move them well."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and vital signs are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 136,
@@ -7810,7 +8890,15 @@
         "pain": "I feel tightness in my chest, especially when I try to take a deep breath."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot."
+      "extraction_notes": "HPI, physical exam findings, and numeric vitals are missing from the screenshot.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 137,
@@ -7871,7 +8959,15 @@
         "pain": "The pain is sharp and makes it hard to move."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 138,
@@ -7929,7 +9025,15 @@
         "pain": "I feel a lot of fatigue and sometimes my muscles ache."
       },
       "incomplete": true,
-      "extraction_notes": "HPI, physical exam findings, and vitals are missing."
+      "extraction_notes": "HPI, physical exam findings, and vitals are missing.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 139,
@@ -7984,7 +9088,15 @@
         "pain": "It feels tender and sometimes itchy."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 140,
@@ -8040,7 +9152,15 @@
         "pain": "It feels like a pressure in my head, and it gets really bad."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and vital signs."
+      "extraction_notes": "Missing HPI, physical exam findings, and vital signs.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 141,
@@ -8083,7 +9203,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 142,
@@ -8139,7 +9267,15 @@
         "pain": "I have a strange feeling in my stomach and my head hurts."
       },
       "incomplete": true,
-      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals."
+      "extraction_notes": "Missing HPI, physical exam findings, and numeric vitals.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 143,
@@ -8244,7 +9380,15 @@
       "missing_fields": [
         "vitals"
       ],
-      "reconstruction_status": "partial"
+      "reconstruction_status": "partial",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 144,
@@ -8287,7 +9431,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 145,
@@ -8356,7 +9508,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 146,
@@ -8442,7 +9602,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 147,
@@ -8485,7 +9653,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 148,
@@ -8535,7 +9711,15 @@
         "correctly_avoided": [],
         "inappropriate_orders": []
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 149,
@@ -8624,7 +9808,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 150,
@@ -8694,7 +9886,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 151,
@@ -8744,7 +9944,15 @@
         "correctly_avoided": [],
         "inappropriate_orders": []
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 152,
@@ -8794,7 +10002,15 @@
         "correctly_avoided": [],
         "inappropriate_orders": []
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 153,
@@ -8864,7 +10080,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 154,
@@ -8919,7 +10143,15 @@
         "correctly_avoided": [],
         "inappropriate_orders": []
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 155,
@@ -8962,7 +10194,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 156,
@@ -9038,7 +10278,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 157,
@@ -9108,7 +10356,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 158,
@@ -9151,7 +10407,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 159,
@@ -9235,7 +10499,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 160,
@@ -9285,7 +10557,15 @@
         "correctly_avoided": [],
         "inappropriate_orders": []
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 161,
@@ -9355,7 +10635,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 162,
@@ -9425,7 +10713,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 163,
@@ -9495,7 +10791,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 164,
@@ -9561,7 +10865,15 @@
         "correctly_avoided": [],
         "inappropriate_orders": []
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 165,
@@ -9639,7 +10951,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 166,
@@ -9709,7 +11029,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 167,
@@ -9779,7 +11107,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 168,
@@ -9849,7 +11185,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 169,
@@ -9935,7 +11279,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 170,
@@ -10021,7 +11373,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 171,
@@ -10064,7 +11424,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 172,
@@ -10134,7 +11502,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 173,
@@ -10204,7 +11580,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 174,
@@ -10247,7 +11631,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 175,
@@ -10290,7 +11682,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 176,
@@ -10333,7 +11733,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 177,
@@ -10376,7 +11784,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 178,
@@ -10419,7 +11835,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 179,
@@ -10462,7 +11886,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 180,
@@ -10505,7 +11937,15 @@
       },
       "incomplete": true,
       "status": "no_screenshot",
-      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book."
+      "extraction_notes": "No screenshot in source folder. To be filled from Crush Step 3 CCS book.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     },
     {
       "id": 181,
@@ -10570,7 +12010,15 @@
           }
         ]
       },
-      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page."
+      "extraction_notes": "Extracted via local Ollama from review screenshot. HPI, PE, vitals not on review page.",
+      "videos": {
+        "idle": [
+          "breathing_01.mp4",
+          "breathing_02.mp4",
+          "breathing_03.mp4"
+        ],
+        "death": "death.mp4"
+      }
     }
   ]
 }

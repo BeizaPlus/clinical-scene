@@ -117,7 +117,11 @@
   function applyCaseData(caseData) {
     idleVideos = (caseData.videos?.idle || []).map((file) => `assets/video/${file}`);
     if (idleVideos.length === 0) {
-      idleVideos = ['assets/video/breathing_01.mp4', 'assets/video/breathing_02.mp4'];
+      idleVideos = [...(window.idleVideos || [
+        'assets/video/breathing_01.mp4',
+        'assets/video/breathing_02.mp4',
+        'assets/video/breathing_03.mp4',
+      ])];
     }
     DEATH_VIDEO = `assets/video/${caseData.videos?.death || 'death.mp4'}`;
     ORDERS = [...(caseData.stacks || [])];
