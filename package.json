@@ -1,0 +1,8 @@
+{
+  "name": "clinical-scene",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "chat-server": "node server/chat-server.js"
+  }
+}
