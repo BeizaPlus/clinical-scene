@@ -4,301 +4,143 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clinical Scene</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; }
-
-    html, body {
-      margin: 0;
-      height: 100%;
-      background: #0a0a0e;
-      color: #f4f4f6;
-      font-family: system-ui, -apple-system, sans-serif;
-    }
-
-    .scene {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px 24px 96px;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(40, 48, 72, 0.35), transparent 70%),
-        #0a0a0e;
-    }
-
-    .scene-stage {
-      width: min(960px, 100%);
-      aspect-ratio: 16 / 10;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: linear-gradient(180deg, rgba(20, 20, 28, 0.95), rgba(12, 12, 18, 0.98));
-      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
-    }
-
-    .toolbar {
-      position: fixed;
-      left: 50%;
-      bottom: 20px;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      padding: 8px 10px;
-      background: rgba(0, 0, 0, 0.92);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-      z-index: 100;
-    }
-
-    .toolbar-sep {
-      width: 1px;
-      height: 22px;
-      background: rgba(255, 255, 255, 0.12);
-      margin: 0 2px;
-      flex-shrink: 0;
-    }
-
-    .toolbar-btn {
-      appearance: none;
-      border: none;
-      background: transparent;
-      width: 40px;
-      height: 40px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-      cursor: pointer;
-      padding: 0;
-      transition: background 0.15s ease, transform 0.1s ease;
-    }
-
-    .toolbar-btn:hover {
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .toolbar-btn:active {
-      transform: scale(0.95);
-    }
-
-    .toolbar-btn svg {
-      width: 24px;
-      height: 24px;
-      display: block;
-      stroke: #ffffff;
-      opacity: 0.6;
-      transition: opacity 0.15s ease;
-    }
-
-    .toolbar-btn:hover svg {
-      opacity: 1;
-    }
-
-    .toolbar-btn.active svg {
-      opacity: 1;
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/scene.css" />
 </head>
 <body>
+  <div class="timer" id="timer" aria-live="polite">5:00</div>
+
   <main class="scene">
-    <div class="scene-stage" aria-label="Clinical scene"></div>
+    <div class="scene-stage" aria-label="Clinical scene">
+      <div class="video-layer" id="video-layer">
+        <video id="idle" src="assets/video/idle.mp4" autoplay muted playsinline loop></video>
+        <video id="deterioration" src="assets/video/deterioration.mp4" muted playsinline preload="auto"></video>
+      </div>
+
+      <div class="vitals-strip" aria-label="Patient vitals">
+        <div class="vital">
+          <span class="vital-label">HR</span>
+          <span class="vital-value" id="vital-hr">98</span>
+        </div>
+        <div class="vital">
+          <span class="vital-label">SpO₂</span>
+          <span class="vital-value" id="vital-spo2">96%</span>
+        </div>
+        <div class="vital">
+          <span class="vital-label">NIBP</span>
+          <span class="vital-value" id="vital-nibp">142/88</span>
+        </div>
+        <div class="vital">
+          <span class="vital-label">RR</span>
+          <span class="vital-value" id="vital-rr">18</span>
+        </div>
+      </div>
+
+      <div class="orders-rail" id="orders-rail" aria-label="Treatment orders"></div>
+
+      <div class="drop-zone" id="patient-drop" aria-label="Drop treatment on patient">
+        <span class="drop-zone-label">Drop on patient</span>
+      </div>
+    </div>
   </main>
 
+  <div class="state-overlay lose" id="lose-overlay" role="dialog" aria-modal="true" aria-labelledby="lose-title">
+    <div class="state-card">
+      <h2 class="state-title" id="lose-title">Patient Deteriorated</h2>
+      <p class="state-subtitle" id="lose-subtitle">Orders placed: 0/5</p>
+      <div class="state-actions">
+        <button type="button" class="state-btn" id="btn-review">Review</button>
+        <button type="button" class="state-btn primary" id="btn-try-again">Try Again</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="state-overlay win" id="win-overlay" role="dialog" aria-modal="true" aria-labelledby="win-title">
+    <div class="state-card">
+      <h2 class="state-title" id="win-title">Patient Stabilized</h2>
+      <p class="state-subtitle">All orders placed in time. Vitals recovering.</p>
+      <div class="state-actions">
+        <button type="button" class="state-btn primary" id="btn-win-dismiss">Continue</button>
+      </div>
+    </div>
+  </div>
+
   <nav class="toolbar" aria-label="Scene controls">
-        <button type="button" class="toolbar-btn" title="Physical exam" aria-label="Stethoscope">
-          <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="#ffffff"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M6 4h-1a2 2 0 0 0 -2 2v3.5a5.5 5.5 0 0 0 11 0v-3.5a2 2 0 0 0 -2 -2h-1" />
-  <path d="M8 15a6 6 0 1 0 12 0v-3" />
-  <path d="M11 3v2" />
-  <path d="M6 3v2" />
-  <path d="M18 10a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-</svg>
-        </button>
-        <button type="button" class="toolbar-btn" title="Vitals" aria-label="Vitals">
-          <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="#ffffff"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M3 12h4.5l1.5 -6l4 12l2 -9l1.5 3h4.5" />
-</svg>
-        </button>
-        <button type="button" class="toolbar-btn" title="Patient chart" aria-label="Chart">
-          <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="#ffffff"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
-  <path d="M9 5a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2" />
-  <path d="M9 15.5h1l1 -2.5l1.5 5l1.5 -5l1 2.5h2.5" />
-</svg>
-        </button>
-        <button type="button" class="toolbar-btn" title="Medical record" aria-label="Record">
-          <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="#ffffff"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" />
-  <path d="M10 14l4 0" />
-  <path d="M12 12l0 4" />
-</svg>
-        </button>
-        <span class="toolbar-sep" aria-hidden="true"></span>
-        <button type="button" class="toolbar-btn" title="Chat" aria-label="Chat">
-          <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="#ffffff"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M8 9h8" />
-  <path d="M8 13h6" />
-  <path d="M9 18h-3a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-3l-3 3l-3 -3" />
-</svg>
-        </button>
-        <button type="button" class="toolbar-btn" title="Voice input" aria-label="Voice">
-          <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="#ffffff"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M15 12.9a5 5 0 1 0 -3.902 -3.9" />
-  <path d="M15 12.9l-3.902 -3.899l-7.513 8.584a2 2 0 1 0 2.827 2.83l8.588 -7.515" />
-</svg>
-        </button>
-        <button type="button" class="toolbar-btn" title="Skip forward" aria-label="Skip">
-          <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="#ffffff"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M4 5v14l12 -7l-12 -7" />
-  <path d="M20 5l0 14" />
-</svg>
-        </button>
-        <button type="button" class="toolbar-btn" title="Restart" aria-label="Restart">
-          <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="#ffffff"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M19.95 11a8 8 0 1 0 -.5 4m.5 5v-5h-5" />
-</svg>
-        </button>
-        <span class="toolbar-sep" aria-hidden="true"></span>
-        <button type="button" class="toolbar-btn" title="Hide cues" aria-label="Hide cues">
-          <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="#ffffff"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M10.585 10.587a2 2 0 0 0 2.829 2.828" />
-  <path d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87" />
-  <path d="M3 3l18 18" />
-</svg>
-        </button>
-        <button type="button" class="toolbar-btn" title="Dark mode" aria-label="Dark mode">
-          <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="#ffffff"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454l0 .008" />
-</svg>
-        </button>
-        <button type="button" class="toolbar-btn" title="Free drop mode" aria-label="Unlock">
-          <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="#ffffff"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2l0 -6" />
-  <path d="M11 16a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-  <path d="M8 11v-5a4 4 0 0 1 8 0" />
-</svg>
-        </button>
+    <button type="button" class="toolbar-btn" title="Physical exam" aria-label="Stethoscope">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 4h-1a2 2 0 0 0 -2 2v3.5a5.5 5.5 0 0 0 11 0v-3.5a2 2 0 0 0 -2 -2h-1" />
+        <path d="M8 15a6 6 0 1 0 12 0v-3" />
+        <path d="M11 3v2" />
+        <path d="M6 3v2" />
+        <path d="M18 10a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+      </svg>
+    </button>
+    <button type="button" class="toolbar-btn" title="Vitals" aria-label="Vitals">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12h4.5l1.5 -6l4 12l2 -9l1.5 3h4.5" />
+      </svg>
+    </button>
+    <button type="button" class="toolbar-btn" title="Patient chart" aria-label="Chart">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
+        <path d="M9 5a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2" />
+        <path d="M9 15.5h1l1 -2.5l1.5 5l1.5 -5l1 2.5h2.5" />
+      </svg>
+    </button>
+    <button type="button" class="toolbar-btn" title="Medical record" aria-label="Record">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" />
+        <path d="M10 14l4 0" />
+        <path d="M12 12l0 4" />
+      </svg>
+    </button>
+    <span class="toolbar-sep" aria-hidden="true"></span>
+    <button type="button" class="toolbar-btn" title="Chat" aria-label="Chat">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 9h8" />
+        <path d="M8 13h6" />
+        <path d="M9 18h-3a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-3l-3 3l-3 -3" />
+      </svg>
+    </button>
+    <button type="button" class="toolbar-btn" title="Voice input" aria-label="Voice">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 12.9a5 5 0 1 0 -3.902 -3.9" />
+        <path d="M15 12.9l-3.902 -3.899l-7.513 8.584a2 2 0 1 0 2.827 2.83l8.588 -7.515" />
+      </svg>
+    </button>
+    <button type="button" class="toolbar-btn" title="Skip forward" aria-label="Skip">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 5v14l12 -7l-12 -7" />
+        <path d="M20 5l0 14" />
+      </svg>
+    </button>
+    <button type="button" class="toolbar-btn" data-action="restart" title="Restart case" aria-label="Restart">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19.95 11a8 8 0 1 0 -.5 4m.5 5v-5h-5" />
+      </svg>
+    </button>
+    <span class="toolbar-sep" aria-hidden="true"></span>
+    <button type="button" class="toolbar-btn" title="Hide cues" aria-label="Hide cues">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10.585 10.587a2 2 0 0 0 2.829 2.828" />
+        <path d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87" />
+        <path d="M3 3l18 18" />
+      </svg>
+    </button>
+    <button type="button" class="toolbar-btn" title="Dark mode" aria-label="Dark mode">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454l0 .008" />
+      </svg>
+    </button>
+    <button type="button" class="toolbar-btn" title="Free drop mode" aria-label="Unlock">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2l0 -6" />
+        <path d="M11 16a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        <path d="M8 11v-5a4 4 0 0 1 8 0" />
+      </svg>
+    </button>
   </nav>
 
-  <script>
-    document.querySelectorAll('.toolbar-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        btn.classList.toggle('active');
-      });
-    });
-  </script>
+  <script src="assets/js/scene.js"></script>
 </body>
 </html>
