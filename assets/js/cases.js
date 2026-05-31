@@ -179,16 +179,32 @@
     window.speechSynthesis.speak(readUtterance);
   }
 
+  function pickVital(value, fallback) {
+    const n = Number(value);
+    return Number.isFinite(n) ? n : fallback;
+  }
+
   function vitalsFromCase(caseData) {
-    const v = caseData.vitals;
+    const v = caseData?.vitals || {};
+    const isChestPainCase1 =
+      caseData?.id === 1 ||
+      (caseData?.title === 'Chest Pain' && String(caseData?.diagnosis || '').includes('Pneumothorax'));
+
+    const defaults = isChestPainCase1
+      ? { hr: 120, spo2: 92, sbp: 88, dbp: 60, rr: 28, temp: 37.2, lactate: 1.5 }
+      : { hr: 98, spo2: 96, sbp: 120, dbp: 80, rr: 18, temp: 37.0, lactate: 1.5 };
+
+    const sbp = pickVital(v.bp_systolic ?? v.sbp, defaults.sbp);
+    const dbp = pickVital(v.bp_diastolic ?? v.dbp, defaults.dbp);
+
     return {
-      hr: v.hr,
-      spo2: v.spo2,
-      sbp: v.bp_systolic,
-      dbp: v.bp_diastolic,
-      rr: v.rr,
-      temp: v.temp,
-      lactate: v.lactate,
+      hr: pickVital(v.hr, defaults.hr),
+      spo2: pickVital(v.spo2, defaults.spo2),
+      sbp,
+      dbp,
+      rr: pickVital(v.rr, defaults.rr),
+      temp: pickVital(v.temp, defaults.temp),
+      lactate: pickVital(v.lactate, defaults.lactate),
     };
   }
 
