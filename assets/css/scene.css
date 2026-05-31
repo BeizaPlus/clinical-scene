@@ -322,7 +322,8 @@ html, body {
 
 .case-panel-body {
   flex: 1;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   max-height: calc(100vh - 40px);
   transition: max-height 200ms ease-in-out, opacity 200ms ease-in-out;
   opacity: 1;
@@ -332,6 +333,182 @@ html, body {
   max-height: 0;
   opacity: 0;
   pointer-events: none;
+}
+
+.case-context {
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.case-context-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.case-context-id,
+.case-context-brand {
+  font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.case-context-brand {
+  color: rgba(232, 184, 75, 0.72);
+}
+
+.case-context-title {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.25;
+}
+
+.case-hpi-block {
+  margin-bottom: 8px;
+}
+
+.case-hpi-summary {
+  position: relative;
+  overflow: hidden;
+}
+
+.case-hpi-summary.is-clamped .case-hpi-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+
+.case-hpi-summary.is-clamped::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.4em;
+  background: linear-gradient(to bottom, rgba(10, 10, 14, 0), rgba(10, 10, 14, 0.96));
+  pointer-events: none;
+}
+
+.case-hpi-text {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.case-hpi-more {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 4px 0 0;
+  font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: rgba(232, 184, 75, 0.75);
+  cursor: pointer;
+}
+
+.case-hpi-more:hover {
+  color: #e8b84b;
+}
+
+.case-hpi-separator {
+  height: 0.5px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0 0 10px;
+}
+
+.case-info-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.case-info-tab {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.case-info-tab:hover {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.case-info-tab.is-active {
+  border-color: rgba(232, 184, 75, 0.55);
+  background: rgba(232, 184, 75, 0.1);
+  color: #e8b84b;
+}
+
+.case-read-btn {
+  appearance: none;
+  border: none;
+  background: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  margin: 0 0 8px;
+  font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.case-read-btn:hover {
+  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.case-read-btn.is-reading {
+  opacity: 0.8;
+  color: #e8b84b;
+}
+
+.case-tab-panel {
+  font-size: 11px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: pre-wrap;
+}
+
+.case-tab-panel:empty {
+  display: none;
+}
+
+.case-tab-field + .case-tab-field {
+  margin-top: 8px;
+}
+
+.case-tab-label {
+  display: block;
+  margin-bottom: 2px;
+  font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
 }
 
 .patient-life-block {
@@ -444,6 +621,46 @@ body.chat-open .scene-hud-vitals {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  max-width: 260px;
+}
+
+.variant-code {
+  min-height: 1rem;
+  font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: #e8b84b;
+}
+
+.difficulty-selector {
+  display: flex;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.difficulty-btn {
+  flex: 1;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(10, 10, 14, 0.88);
+  color: rgba(255, 255, 255, 0.55);
+  border-radius: 6px;
+  padding: 5px 4px;
+  font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.difficulty-btn:hover {
+  border-color: rgba(232, 184, 75, 0.35);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.difficulty-btn.is-active {
+  border-color: rgba(232, 184, 75, 0.55);
+  background: rgba(232, 184, 75, 0.12);
+  color: #e8b84b;
 }
 
 .case-selector-label {
@@ -599,6 +816,14 @@ body.chat-open .scene-hud-vitals {
   line-height: 1.55;
 }
 
+.chart-variant-code {
+  margin-bottom: 8px;
+  font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: #e8b84b;
+}
+
 .timer {
   position: fixed;
   top: 18px;
@@ -748,6 +973,37 @@ body.chat-open .scene-hud-vitals {
 .state-overlay.visible {
   opacity: 1;
   pointer-events: auto;
+}
+
+.audio-start-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 140;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 96px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: transparent;
+}
+
+.audio-start-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.audio-start-label {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .state-overlay.lose::before {

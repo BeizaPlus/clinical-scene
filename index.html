@@ -10,6 +10,12 @@
   <div class="case-selector-wrap">
     <label class="case-selector-label" for="case-selector">Case</label>
     <select id="case-selector" class="case-selector" aria-label="Select case"></select>
+    <div class="variant-code" id="variant-code" aria-live="polite"></div>
+    <div class="difficulty-selector" id="difficulty-selector" role="group" aria-label="Difficulty level">
+      <button type="button" class="difficulty-btn is-active" data-difficulty="standard">Standard</button>
+      <button type="button" class="difficulty-btn" data-difficulty="challenging">Challenging</button>
+      <button type="button" class="difficulty-btn" data-difficulty="expert">Expert</button>
+    </div>
   </div>
 
   <div class="timer" id="timer" aria-live="polite">5:00</div>
@@ -57,6 +63,35 @@
       </span>
     </button>
     <div class="case-panel-body" id="case-panel-body">
+      <section class="case-context" aria-label="Case information">
+        <div class="case-context-meta">
+          <span class="case-context-id" id="case-context-id">CASE 1</span>
+          <span class="case-context-brand">SCHOONMAKER</span>
+        </div>
+        <h2 class="case-context-title" id="case-context-title">Chest Pain</h2>
+        <div class="case-hpi-block">
+          <div class="case-hpi-summary" id="case-hpi-summary">
+            <p class="case-hpi-text" id="case-hpi-text">No HPI available for this case yet.</p>
+          </div>
+          <button type="button" class="case-hpi-more" id="case-hpi-more" hidden>show more</button>
+        </div>
+        <div class="case-hpi-separator" aria-hidden="true"></div>
+        <div class="case-info-tabs" id="case-info-tabs" role="tablist" aria-label="Case sections">
+          <button type="button" class="case-info-tab is-active" data-case-tab="hpi" aria-selected="true">HPI</button>
+          <button type="button" class="case-info-tab" data-case-tab="exam" aria-selected="false">Physical exam</button>
+          <button type="button" class="case-info-tab" data-case-tab="treatment" aria-selected="false">Treatment</button>
+          <button type="button" class="case-info-tab" data-case-tab="notes" aria-selected="false">Notes</button>
+        </div>
+        <button type="button" class="case-read-btn" id="case-read-btn" aria-label="Read case aloud">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 5L6 9H2v6h4l5 4V5z" />
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+          </svg>
+          <span>READ CASE</span>
+        </button>
+        <div class="case-tab-panel" id="case-tab-panel" aria-live="polite"></div>
+      </section>
       <div class="patient-life-block">
         <span class="patient-life-label">PATIENT LIFE</span>
         <div class="patient-life-bar" aria-hidden="true">
@@ -167,6 +202,10 @@
         <button type="button" class="state-btn primary" id="btn-win-dismiss">Continue</button>
       </div>
     </div>
+  </div>
+
+  <div class="audio-start-overlay" id="audio-start-overlay" aria-hidden="true">
+    <span class="audio-start-label">Tap to start audio</span>
   </div>
 
   <nav class="toolbar" aria-label="Scene controls">
