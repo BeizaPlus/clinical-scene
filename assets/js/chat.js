@@ -1,13 +1,9 @@
 (() => {
   'use strict';
 
-  const CASE_ID = '143';
-  const CASE_HEADER = 'CASE 143 — POOR FEEDING';
-  const CHAT_STORAGE_KEY = `chat_history_case_${CASE_ID}`;
   const API_BASE = window.CLINICAL_SCENE_API || 'http://127.0.0.1:3002';
   const FALLBACK_REPLY = "I'm having trouble speaking right now.";
 
-  let caseData = null;
   let sessionId = null;
   let chatOpen = false;
 
@@ -19,32 +15,15 @@
     toggleBtn: document.querySelector('[data-action="toggle-chat"]'),
   };
 
-  function buildSystemPrompt(context) {
-    return `You are the patient in this clinical case. Speak in first person only.
-
-Voice rules:
-- You only know what is in the case file below. Never invent facts.
-- You are scared, in pain, and confused — not clinical.
-- Do not use medical terminology.
-- Say things like "my head is killing me" not "headache rated 8/10".
-- If asked something outside the case file, say: "I don't know... I just feel awful."
-- Short answers. Fragmented. Like a sick person talks.
-- Maximum 2 sentences per response.
-
-CASE FILE:
-${JSON.stringify(context, null, 2)}`;
-  }
-
-  async function loadCaseData() {
-    if (caseData) return caseData;
-    const response = await fetch('assets/data/case-143.json');
-    caseData = await response.json();
-    return caseData;
+  function chatStorageKey() {
+    const caseData = window.ClinicalCases?.getActiveCase();
+    const id = caseData?.id ?? 'unknown';
+    return `chat_history_case_${id}`;
   }
 
   function loadHistory() {
     try {
-      const raw = localStorage.getItem(CHAT_STORAGE_KEY);
+      const raw = localStorage.getItem(chatStorageKey());
       return raw ? JSON.parse(raw) : [];
     } catch {
       return [];
@@ -52,7 +31,7 @@ ${JSON.stringify(context, null, 2)}`;
   }
 
   function saveHistory(history) {
-    localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(history));
+    localStorage.setItem(chatStorageKey(), JSON.stringify(history));
   }
 
   function formatTimestamp(iso) {
@@ -120,14 +99,18 @@ ${JSON.stringify(context, null, 2)}`;
   async function ensureSession() {
     if (sessionId) return sessionId;
 
-    const context = await loadCaseData();
+    const caseData = window.ClinicalCases?.getActiveCase();
+    if (!caseData) throw new Error('No active case');
+
     const response = await fetch(`${API_BASE}/api/case-chat/start`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         caseContext: {
-          ...context,
+          id: String(caseData.id),
+          title: caseData.title,
           playRole: 'patient',
+          systemPrompt: window.ClinicalCases.buildPatientPrompt(caseData),
         },
       }),
     });
@@ -199,7 +182,7 @@ ${JSON.stringify(context, null, 2)}`;
   }
 
   function clearHistory() {
-    localStorage.removeItem(CHAT_STORAGE_KEY);
+    localStorage.removeItem(chatStorageKey());
     sessionId = null;
     renderHistory([]);
   }
@@ -208,6 +191,11 @@ ${JSON.stringify(context, null, 2)}`;
     const history = loadHistory();
     if (history.length === 0) return false;
     return window.confirm('Clear chat history for this case? (yes/no)') === true;
+  }
+
+  function onCaseChanged() {
+    sessionId = null;
+    if (chatOpen) renderHistory(loadHistory());
   }
 
   function initChat() {
@@ -222,6 +210,7 @@ ${JSON.stringify(context, null, 2)}`;
     window.ClinicalChat = {
       clearHistory,
       confirmClearOnReset,
+      onCaseChanged,
       open: () => setChatOpen(true),
       close: () => setChatOpen(false),
     };

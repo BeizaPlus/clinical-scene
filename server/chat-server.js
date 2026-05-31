@@ -97,8 +97,9 @@ const server = http.createServer(async (req, res) => {
       const body = await readBody(req);
       const caseContext = body.caseContext || loadCaseData();
       const sessionId = crypto.randomUUID().replace(/-/g, '');
+      const prompt = caseContext.systemPrompt || buildPatientPrompt(caseContext);
       sessions.set(sessionId, {
-        messages: [{ role: 'system', content: buildPatientPrompt(caseContext) }],
+        messages: [{ role: 'system', content: prompt }],
       });
       sendJson(res, 200, { ok: true, sessionId, caseId: caseContext.id });
       return;

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import shutil
 import sys
@@ -12,7 +13,7 @@ from pathlib import Path
 SOURCE_DIR = Path(r"C:\Users\steve\Downloads")
 PROJECT_ROOT = Path(__file__).resolve().parent
 DEST_DIR = PROJECT_ROOT / "assets" / "video"
-SCENE_JS = PROJECT_ROOT / "assets" / "js" / "scene.js"
+CASES_JSON = PROJECT_ROOT / "data" / "cases.json"
 
 DEATH_KEYWORDS = ("death", "die", "deteriorat")
 BREATH_KEYWORDS = ("breath", "idle", "loop")

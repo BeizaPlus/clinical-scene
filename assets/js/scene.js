@@ -1,34 +1,21 @@
 (() => {
   'use strict';
 
-  const idleVideos = [
-    'assets/video/breathing_01.mp4',
-    'assets/video/breathing_02.mp4',
-    // drop new files here as they are generated
-  ];
+  let idleVideos = [];
+  let DEATH_VIDEO = 'assets/video/death.mp4';
+  let ORDERS = [];
+  let TOTAL_ORDERS = 0;
+  let START_VITALS = { hr: 98, spo2: 96, sbp: 120, dbp: 80, rr: 18, temp: 37, lactate: 1.5 };
+  let PATHWAY_LABEL = '';
+  let gameStarted = false;
 
-  const DEATH_VIDEO = 'assets/video/death.mp4';
   const IDLE_CROSSFADE_MS = 800;
-  const CASE_ID = '143';
-  const PATHWAY_LABEL = 'Standard ED pathway';
   const PANEL_COLLAPSED_KEY = 'panel_collapsed';
-
-  const START_VITALS = { hr: 128, spo2: 95, sbp: 96, dbp: 58, rr: 28, temp: 39, lactate: 2.5 };
   const NORMAL = { hr: 88, spo2: 98, sbp: 118, dbp: 72, rr: 16, temp: 37, lactate: 1.2 };
   const TIMER_START_SEC = 5 * 60;
   const DRIFT_MS = 10_000;
   const TREATMENT_PAUSE_MS = 8_000;
   const WIN_ANIM_MS = 5_000;
-
-  const ORDERS = [
-    'Supplemental O₂',
-    'IV Fluids',
-    'Cardiac Monitor',
-    'Blood Cultures',
-    'Broad-Spectrum Abx',
-  ];
-
-  const TOTAL_ORDERS = 5;
 
   const state = {
     phase: 'playing',
@@ -99,6 +86,19 @@
     const m = Math.floor(sec / 60);
     const s = sec % 60;
     return `${m}:${String(s).padStart(2, '0')}`;
+  }
+
+  function applyCaseData(caseData) {
+    idleVideos = (caseData.videos?.idle || []).map((file) => `assets/video/${file}`);
+    if (idleVideos.length === 0) {
+      idleVideos = ['assets/video/breathing_01.mp4', 'assets/video/breathing_02.mp4'];
+    }
+    DEATH_VIDEO = `assets/video/${caseData.videos?.death || 'death.mp4'}`;
+    ORDERS = [...(caseData.stacks || [])];
+    TOTAL_ORDERS = ORDERS.length;
+    START_VITALS = window.ClinicalCases.vitalsFromCase(caseData);
+    PATHWAY_LABEL = caseData.specialty || '';
+    resetCase(true);
   }
 
   function pickIdle(exclude) {
@@ -555,7 +555,7 @@
 
     els.deathVideo.pause();
     els.deathVideo.currentTime = 0;
-    startIdlePool();
+    initVideos();
 
     updateTimerDisplay();
     renderVitals();
@@ -567,9 +567,6 @@
   }
 
   function initVideos() {
-    els.deathVideo.muted = true;
-    els.deathVideo.playsInline = true;
-    els.deathVideo.addEventListener('ended', holdDeathLastFrame);
     startIdlePool();
   }
 
@@ -613,6 +610,7 @@
           return;
         }
         if (action === 'toggle-chat') return;
+        if (action === 'open-pe' || action === 'open-hpi') return;
         btn.classList.toggle('active');
       });
     });
@@ -626,18 +624,24 @@
 
   function init() {
     initAudio();
-    initVideos();
-    buildOrders();
-    updateTimerDisplay();
-    renderVitals();
+    els.deathVideo.muted = true;
+    els.deathVideo.playsInline = true;
+    els.deathVideo.addEventListener('ended', holdDeathLastFrame);
     wireToolbar();
     wireCasePanel();
 
-    document.body.addEventListener('pointerdown', resumeAudio, { once: true });
+    window.addEventListener('cases-ready', (event) => {
+      applyCaseData(event.detail);
+      gameStarted = true;
+    });
 
-    state.intervals.timer = setInterval(tickTimer, 1000);
-    state.intervals.drift = setInterval(tickDrift, DRIFT_MS);
-    scheduleBeep();
+    window.addEventListener('case-loaded', (event) => {
+      if (!gameStarted) return;
+      applyCaseData(event.detail);
+      window.ClinicalChat?.onCaseChanged?.();
+    });
+
+    document.body.addEventListener('pointerdown', resumeAudio, { once: true });
   }
 
   if (document.readyState === 'loading') {

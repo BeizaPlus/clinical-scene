@@ -1,0 +1,112 @@
+{
+  "cases": [
+    {
+      "id": 1,
+      "title": "Chest Pain",
+      "specialty": "Emergency Medicine",
+      "diagnosis": "Tension Pneumothorax",
+      "hpi": "The patient, a 65-year-old accountant, is brought to the emergency department by ambulance from the trucking company, where he works. Ten minutes prior to the ambulance's arrival, the patient developed excruciating, sharp pain on the right side of his chest accompanied by marked respiratory distress. He rates the pain as an 8 on a 10-point scale. The pain increases on respiration, and he is unable to answer questions. A coworker who accompanied the patient to the hospital says that this has never happened to the patient in the past. Coworker mentions patient has a past medical history of emphysema and asthma. Oxygen was administered during transport.",
+      "physical_exam": {
+        "general": "Diaphoretic and anxious, clutching chest",
+        "cardiovascular": "Tachycardic, regular rhythm, no new murmur",
+        "respiratory": "Mild tachypnea, bibasilar crackles absent",
+        "abdomen": "Soft, non-tender",
+        "extremities": "",
+        "neuro": "Alert and oriented",
+        "skin": "Cool clammy extremities"
+      },
+      "vitals": {
+        "hr": 120,
+        "spo2": 96,
+        "bp_systolic": 100,
+        "bp_diastolic": 60,
+        "rr": 34,
+        "temp": 37.0,
+        "map": 73,
+        "lactate": 1.8
+      },
+      "stacks": [
+        "Cardiac Monitor",
+        "IV Access + Fluids",
+        "Stat Labs",
+        "Bedside / CT imaging",
+        "Admit / Disposition"
+      ],
+      "correct_orders": [
+        "Physical Exam: General Appearance",
+        "Physical Exam: Chest / Lungs",
+        "X-ray chest PA/lateral",
+        "Pulse oximetry",
+        "ECG 12-lead",
+        "Tube thoracostomy"
+      ],
+      "should_have_ordered": [
+        "Cardiac Troponin I serum",
+        "Cardiac enzymes serum"
+      ],
+      "case_summary": "A 65-year-old white man is brought in to the emergency department because of sharp chest pain and difficulty breathing. At bedside, he currently is in acute distress, and is moaning and holding his hands over the right side of his chest",
+      "patient_voice": {
+        "chief_complaint": "I can't breathe. My chest hurts so bad.",
+        "history": "It just came on. I was just sitting there.",
+        "pain": "Like something is crushing me from inside."
+      },
+      "videos": {
+        "idle": ["breathing_01.mp4", "breathing_02.mp4"],
+        "death": "death.mp4"
+      }
+    },
+    {
+      "id": 2,
+      "title": "Altered Mental Status",
+      "specialty": "Neurology",
+      "diagnosis": "Subdural Hematoma",
+      "hpi": "A 70-year-old Caucasian man comes to the Emergency room because his family members are concerned that something is wrong. The patient has been having behavioral changes over a period of three or four weeks. He used to be very active and managed all of his financial affairs. He now barely talks, stares at the wall for hours at a time, and sleeps most of the day. Four weeks ago, the patient got up to urinate and fell before reaching the bathroom. He was found on the floor the next morning by family members. He was taken to his family doctor and was discharged with a prescription to buy a cane. Since that time, he has been having problems walking. There have been no fevers or night sweats. The patient is currently in no pain.",
+      "physical_exam": {
+        "general": "Somnolent, intermittently arousable",
+        "cardiovascular": "Tachycardic with delayed capillary refill",
+        "respiratory": "Compensatory tachypnea",
+        "abdomen": "Soft, no rebound or guarding",
+        "extremities": "",
+        "neuro": "Confused, follows simple commands; gait unsteady after recent fall",
+        "skin": "Warm with mild diaphoresis"
+      },
+      "vitals": {
+        "hr": 88,
+        "spo2": 96,
+        "bp_systolic": 115,
+        "bp_diastolic": 85,
+        "rr": 18,
+        "temp": 36.8,
+        "map": 95,
+        "lactate": 1.8
+      },
+      "stacks": [
+        "CT Head without contrast",
+        "Saline solution normal",
+        "Toxicology screen urine",
+        "Vital signs",
+        "Consult surgery neurologic / Craniotomy"
+      ],
+      "correct_orders": [
+        "CT head without contrast",
+        "MRI head without gadolinium",
+        "Consult surgery neurologic / Craniotomy"
+      ],
+      "should_have_ordered": [
+        "CBC with differential",
+        "Basic metabolic profile",
+        "Hormone thyroid stimulating serum"
+      ],
+      "case_summary": "A 70 year old Caucasian man comes in by EMS to the emergency room due to altered mental status.",
+      "patient_voice": {
+        "chief_complaint": "I fell. I think. I don't remember.",
+        "history": "My head has been off. I keep forgetting things.",
+        "pain": "I just feel confused. Everything is slow."
+      },
+      "videos": {
+        "idle": ["breathing_01.mp4", "breathing_02.mp4"],
+        "death": "death.mp4"
+      }
+    }
+  ]
+}

@@ -7,11 +7,16 @@
   <link rel="stylesheet" href="assets/css/scene.css" />
 </head>
 <body>
+  <div class="case-selector-wrap">
+    <label class="case-selector-label" for="case-selector">Case</label>
+    <select id="case-selector" class="case-selector" aria-label="Select case"></select>
+  </div>
+
   <div class="timer" id="timer" aria-live="polite">5:00</div>
 
   <aside class="chat-panel" id="chat-panel" aria-label="Patient chat">
     <header class="chat-header">
-      <span class="chat-case-label">CASE 143 — POOR FEEDING</span>
+      <span class="chat-case-label">CASE 1 — CHEST PAIN</span>
     </header>
     <div class="chat-separator" aria-hidden="true"></div>
     <div class="chat-messages" id="chat-messages" role="log" aria-live="polite"></div>
@@ -119,6 +124,14 @@
     </div>
   </div>
 
+  <aside class="chart-panel" id="chart-panel" aria-label="Patient chart">
+    <header class="chart-panel-header">
+      <h2 class="chart-panel-title" id="chart-title">Chart</h2>
+      <button type="button" class="chart-panel-close" id="chart-close" aria-label="Close chart">×</button>
+    </header>
+    <div class="chart-panel-body" id="chart-body"></div>
+  </aside>
+
   <main class="scene">
     <div class="scene-stage" aria-label="Clinical scene">
       <div class="video-layer" id="video-layer">
@@ -157,7 +170,7 @@
   </div>
 
   <nav class="toolbar" aria-label="Scene controls">
-    <button type="button" class="toolbar-btn" title="Physical exam" aria-label="Stethoscope">
+    <button type="button" class="toolbar-btn" data-action="open-pe" title="Physical exam" aria-label="Stethoscope">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M6 4h-1a2 2 0 0 0 -2 2v3.5a5.5 5.5 0 0 0 11 0v-3.5a2 2 0 0 0 -2 -2h-1" />
         <path d="M8 15a6 6 0 1 0 12 0v-3" />
@@ -171,7 +184,7 @@
         <path d="M3 12h4.5l1.5 -6l4 12l2 -9l1.5 3h4.5" />
       </svg>
     </button>
-    <button type="button" class="toolbar-btn" title="Patient chart" aria-label="Chart">
+    <button type="button" class="toolbar-btn" data-action="open-hpi" title="Patient chart" aria-label="Chart">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
         <path d="M9 5a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2" />
@@ -233,6 +246,7 @@
     </button>
   </nav>
 
+  <script src="assets/js/cases.js"></script>
   <script src="assets/js/scene.js"></script>
   <script src="assets/js/chat.js"></script>
 </body>

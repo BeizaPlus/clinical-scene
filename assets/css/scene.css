@@ -436,9 +436,46 @@ body.chat-open .scene-hud-vitals {
   transition: left 200ms ease-in-out;
 }
 
-.scene-hud-vitals {
+.case-selector-wrap {
   position: fixed;
   top: 12px;
+  left: 12px;
+  z-index: 82;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.case-selector-label {
+  font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.case-selector {
+  appearance: none;
+  min-width: 220px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(10, 10, 14, 0.92);
+  color: rgba(255, 255, 255, 0.88);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+.case-selector:focus {
+  outline: none;
+  border-color: rgba(232, 184, 75, 0.45);
+}
+
+.scene-hud-vitals {
+  position: fixed;
+  top: 72px;
   left: 12px;
   z-index: 80;
   display: grid;
@@ -477,6 +514,90 @@ body.chat-open .scene-hud-vitals {
 .hud-vital-value.amber { color: #e8b84b; }
 .hud-vital-value.red { color: #ef5350; animation: vital-pulse 1s ease-in-out infinite; }
 .hud-vital-value.flash { animation: vital-flash 0.45s ease; }
+
+.chart-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.98);
+  z-index: 130;
+  width: min(520px, 92vw);
+  max-height: min(72vh, 640px);
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 10, 14, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.chart-panel.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.chart-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.chart-panel-title {
+  margin: 0;
+  font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.chart-panel-close {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.chart-panel-close:hover { color: #fff; }
+
+.chart-panel-body {
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.chart-field-label {
+  font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #e8b84b;
+  margin-bottom: 6px;
+}
+
+.chart-field-text {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  white-space: pre-wrap;
+}
+
+.chart-field-text--block {
+  line-height: 1.55;
+}
 
 .timer {
   position: fixed;
