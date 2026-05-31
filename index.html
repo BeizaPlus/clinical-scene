@@ -46,22 +46,46 @@
     </form>
   </aside>
 
-  <aside class="case-panel" id="case-panel" aria-label="Case panel">
-    <button type="button" class="case-panel-header" id="case-panel-toggle" aria-expanded="true" aria-controls="case-panel-body">
+  <button type="button" class="case-panel-reveal" id="case-panel-reveal" hidden aria-label="Show case panel">CASE ›</button>
+
+  <aside class="case-panel is-docked" id="case-panel" aria-label="Case panel">
+    <div class="case-panel-header" id="case-panel-header">
       <span class="case-panel-title">:: SCHOONMAKER</span>
       <span class="case-panel-header-actions">
-        <span class="case-panel-refresh" id="case-panel-refresh" title="Restart case" aria-label="Restart case">
+        <span class="case-panel-controls" role="group" aria-label="Panel layout">
+          <button type="button" class="case-panel-ctrl is-active" id="case-panel-dock" title="Dock" aria-label="Dock panel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="1" />
+              <path d="M15 3v18" />
+            </svg>
+          </button>
+          <button type="button" class="case-panel-ctrl" id="case-panel-float" title="Float" aria-label="Float panel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M15 3h6v6" />
+              <path d="M9 21H3v-6" />
+              <path d="M21 3l-7 7" />
+              <path d="M3 21l7 -7" />
+            </svg>
+          </button>
+          <button type="button" class="case-panel-ctrl" id="case-panel-collapse" title="Collapse" aria-label="Collapse panel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 9l6 6l6 -6" />
+            </svg>
+          </button>
+          <button type="button" class="case-panel-ctrl" id="case-panel-hide" title="Hide" aria-label="Hide panel">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 6l-12 12" />
+              <path d="M6 6l12 12" />
+            </svg>
+          </button>
+        </span>
+        <button type="button" class="case-panel-refresh" id="case-panel-refresh" title="Restart case" aria-label="Restart case">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M19.95 11a8 8 0 1 0 -.5 4m.5 5v-5h-5" />
           </svg>
-        </span>
-        <span class="case-panel-chevron" title="Collapse panel" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 6l6 6l-6 6" />
-          </svg>
-        </span>
+        </button>
       </span>
-    </button>
+    </div>
     <div class="case-panel-body" id="case-panel-body">
       <section class="case-context" aria-label="Case information">
         <div class="case-context-meta">
@@ -138,6 +162,7 @@
         <div class="monitor-orders" id="monitor-orders">Orders placed: 0/5</div>
       </div>
     </div>
+    <div class="case-panel-resize" id="case-panel-resize" aria-hidden="true"></div>
   </aside>
 
   <div class="scene-hud-vitals" aria-label="Live vitals">

@@ -235,13 +235,13 @@ html, body {
 .chat-send:active { transform: scale(0.95); }
 .chat-send:disabled { opacity: 0.45; cursor: default; }
 
-/* ── case panel (v5/v6) ── */
+/* ── case panel (v5/v9) ── */
 .case-panel {
   position: fixed;
   top: 0;
   right: 0;
   z-index: 85;
-  width: min(300px, 34vw);
+  width: 340px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -249,11 +249,49 @@ html, body {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   box-shadow: -8px 0 32px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+.case-panel.is-floating {
+  top: var(--panel-y, 80px);
+  left: var(--panel-x, calc(100vw - 360px));
+  right: auto;
+  width: var(--panel-w, 340px);
+  height: var(--panel-h, calc(100vh - 100px));
+  border: 0.5px solid rgba(220, 180, 80, 0.55);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 0 0 0.5px rgba(220, 180, 80, 0.15);
+  overflow: hidden;
+}
+
+.case-panel.is-floating .case-panel-header {
+  cursor: grab;
+}
+
+.case-panel.is-floating.is-dragging .case-panel-header {
+  cursor: grabbing;
+}
+
+.case-panel.is-collapsed {
+  height: 40px;
+  overflow: hidden;
+}
+
+.case-panel.is-collapsed.is-docked {
+  top: 0;
+  right: 0;
+  left: auto;
+  width: 340px;
+}
+
+.case-panel.is-collapsed.is-floating {
+  height: 40px;
+}
+
+.case-panel.is-hidden {
+  display: none;
 }
 
 .case-panel-header {
-  appearance: none;
-  border: none;
   flex-shrink: 0;
   width: 100%;
   height: 40px;
@@ -261,20 +299,15 @@ html, body {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 0 12px 0 14px;
+  padding: 0 8px 0 14px;
   background: rgba(10, 10, 14, 0.92);
   color: rgba(255, 255, 255, 0.72);
-  cursor: pointer;
+  user-select: none;
   transition: background 200ms ease-in-out;
 }
 
 .case-panel.is-collapsed .case-panel-header {
   background: rgba(10, 10, 14, 0.96);
-}
-
-.case-panel-header:hover .case-panel-chevron {
-  opacity: 0.85;
-  color: #e8b84b;
 }
 
 .case-panel-title {
@@ -287,10 +320,49 @@ html, body {
 .case-panel-header-actions {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
+}
+
+.case-panel-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.case-panel-ctrl {
+  appearance: none;
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.72);
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.case-panel-ctrl:hover {
+  opacity: 1;
+}
+
+.case-panel-ctrl.is-active {
+  opacity: 1;
+  color: #e8b84b;
+}
+
+.case-panel-ctrl.is-active:hover {
+  color: #f0c85c;
 }
 
 .case-panel-refresh {
+  appearance: none;
+  border: none;
+  background: transparent;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -298,6 +370,7 @@ html, body {
   height: 28px;
   border-radius: 6px;
   color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
@@ -306,33 +379,76 @@ html, body {
   color: rgba(255, 255, 255, 0.85);
 }
 
-.case-panel-chevron {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  opacity: 0.5;
-  transition: opacity 0.15s ease, color 0.15s ease, transform 200ms ease-in-out;
+.case-panel-resize {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 14px;
+  height: 14px;
+  cursor: nwse-resize;
+  z-index: 2;
 }
 
-.case-panel.is-collapsed .case-panel-chevron {
-  transform: rotate(180deg);
+.case-panel-resize::after {
+  content: "";
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid rgba(220, 180, 80, 0.45);
+  border-bottom: 1.5px solid rgba(220, 180, 80, 0.45);
+}
+
+.case-panel.is-floating:not(.is-collapsed) .case-panel-resize {
+  display: block;
 }
 
 .case-panel-body {
   flex: 1;
+  min-height: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  max-height: calc(100vh - 40px);
-  transition: max-height 200ms ease-in-out, opacity 200ms ease-in-out;
+  transition: opacity 200ms ease-in-out;
   opacity: 1;
 }
 
 .case-panel.is-collapsed .case-panel-body {
-  max-height: 0;
-  opacity: 0;
-  pointer-events: none;
+  display: none;
+}
+
+.case-panel.is-floating:not(.is-collapsed) .case-panel-body {
+  max-height: none;
+}
+
+.case-panel-reveal {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 84;
+  padding: 8px 4px;
+  background: rgba(10, 10, 14, 0.9);
+  border: 0.5px solid rgba(220, 180, 80, 0.3);
+  border-left: none;
+  color: rgba(220, 180, 80, 0.6);
+  font-family: "JetBrains Mono", "SF Mono", "Consolas", monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  writing-mode: vertical-rl;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.case-panel-reveal:hover {
+  opacity: 1;
+  color: rgba(220, 180, 80, 0.95);
+}
+
+.case-panel-reveal[hidden] {
+  display: none;
 }
 
 .case-context {

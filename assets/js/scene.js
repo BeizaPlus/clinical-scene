@@ -10,7 +10,13 @@
   let gameStarted = false;
 
   const IDLE_CROSSFADE_MS = 800;
-  const PANEL_COLLAPSED_KEY = 'panel_collapsed';
+  const PANEL_MODE_KEY = 'panel_mode';
+  const PANEL_POSITION_KEY = 'panel_position';
+  const PANEL_DOCKED_WIDTH = 340;
+  const PANEL_MIN_WIDTH = 280;
+  const PANEL_MAX_WIDTH = 600;
+  const PANEL_MIN_HEIGHT = 300;
+  const PANEL_HEADER_HEIGHT = 40;
   const NORMAL = { hr: 88, spo2: 98, sbp: 118, dbp: 72, rr: 16, temp: 37, lactate: 1.2 };
   const TIMER_START_SEC = 5 * 60;
   const DRIFT_MS = 10_000;
@@ -60,8 +66,26 @@
     },
     patientLifeFill: document.getElementById('patient-life-fill'),
     casePanel: document.getElementById('case-panel'),
-    casePanelToggle: document.getElementById('case-panel-toggle'),
+    casePanelHeader: document.getElementById('case-panel-header'),
     casePanelRefresh: document.getElementById('case-panel-refresh'),
+    casePanelDock: document.getElementById('case-panel-dock'),
+    casePanelFloat: document.getElementById('case-panel-float'),
+    casePanelCollapse: document.getElementById('case-panel-collapse'),
+    casePanelHide: document.getElementById('case-panel-hide'),
+    casePanelResize: document.getElementById('case-panel-resize'),
+    casePanelReveal: document.getElementById('case-panel-reveal'),
+  };
+
+  const panelState = {
+    mode: 'docked',
+    layout: 'docked',
+    lastVisibleMode: 'docked',
+    x: 0,
+    y: 80,
+    width: PANEL_DOCKED_WIDTH,
+    height: Math.max(PANEL_MIN_HEIGHT, window.innerHeight - 100),
+    drag: null,
+    resize: null,
   };
 
   let frontSlot = els.activeSlot;
@@ -69,6 +93,7 @@
   let lastIdleSrc = '';
   let idleSwapping = false;
   let deathTriggered = false;
+  let audioUnlocked = false;
 
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
@@ -304,7 +329,7 @@
       state.audio.ambient = { ambientGain, ambientOsc, ambientOsc2 };
 
       const beepGain = ctx.createGain();
-      beepGain.gain.value = 0;
+      beepGain.gain.value = 1;
       beepGain.connect(ctx.destination);
       state.audio.beepGain = beepGain;
     } catch {
@@ -312,8 +337,52 @@
     }
   }
 
+  async function unlockAudio() {
+    if (audioUnlocked) return true;
+    if (!state.audio?.ctx) return false;
+    try {
+      await state.audio.ctx.resume();
+    } catch {
+      return false;
+    }
+    if (state.audio.ctx.state !== 'running') return false;
+
+    audioUnlocked = true;
+    localStorage.setItem('audio_unlocked', '1');
+    hideAudioStartOverlay();
+    if (state.phase === 'playing') scheduleBeep();
+    return true;
+  }
+
   function resumeAudio() {
-    state.audio?.ctx?.resume?.();
+    unlockAudio();
+  }
+
+  async function tryAutoUnlockAudio() {
+    if (audioUnlocked) return;
+    if (localStorage.getItem('audio_unlocked') !== '1') return;
+    await unlockAudio();
+    hideAudioStartOverlay();
+  }
+
+  function showAudioStartOverlay() {
+    if (audioUnlocked || localStorage.getItem('audio_unlocked') === '1') return;
+    document.getElementById('audio-start-overlay')?.classList.add('visible');
+  }
+
+  function hideAudioStartOverlay() {
+    document.getElementById('audio-start-overlay')?.classList.remove('visible');
+  }
+
+  function wireAudioStartOverlay() {
+    const overlay = document.getElementById('audio-start-overlay');
+    if (!overlay) return;
+
+    overlay.addEventListener('pointerdown', async (event) => {
+      event.preventDefault();
+      await unlockAudio();
+      hideAudioStartOverlay();
+    });
   }
 
   function playBeep() {
@@ -570,34 +639,367 @@
     startIdlePool();
   }
 
-  function setPanelCollapsed(collapsed) {
-    els.casePanel?.classList.toggle('is-collapsed', collapsed);
-    els.casePanelToggle?.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-    localStorage.setItem(PANEL_COLLAPSED_KEY, collapsed ? '1' : '0');
-    const chevron = els.casePanel?.querySelector('.case-panel-chevron');
-    if (chevron) chevron.title = collapsed ? 'Expand panel' : 'Collapse panel';
+  function clampPanel(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
+
+  function readPanelPosition() {
+    try {
+      const raw = localStorage.getItem(PANEL_POSITION_KEY);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed !== 'object') return null;
+      return {
+        x: Number.isFinite(parsed.x) ? parsed.x : null,
+        y: Number.isFinite(parsed.y) ? parsed.y : null,
+        width: Number.isFinite(parsed.width) ? parsed.width : PANEL_DOCKED_WIDTH,
+        height: Number.isFinite(parsed.height) ? parsed.height : Math.max(PANEL_MIN_HEIGHT, window.innerHeight - 100),
+        lastVisibleMode: parsed.lastVisibleMode || null,
+      };
+    } catch {
+      return null;
+    }
+  }
+
+  function writePanelPosition() {
+    const payload = {
+      x: panelState.layout === 'floating' ? panelState.x : null,
+      y: panelState.layout === 'floating' ? panelState.y : null,
+      width: panelState.width,
+      height: panelState.height,
+    };
+    if (panelState.mode === 'hidden') {
+      payload.lastVisibleMode = panelState.lastVisibleMode;
+    }
+    localStorage.setItem(PANEL_POSITION_KEY, JSON.stringify(payload));
+  }
+
+  function writePanelMode() {
+    localStorage.setItem(PANEL_MODE_KEY, panelState.mode);
+  }
+
+  function defaultFloatingPosition() {
+    const width = clampPanel(panelState.width, PANEL_MIN_WIDTH, PANEL_MAX_WIDTH);
+    const height = clampPanel(panelState.height, PANEL_MIN_HEIGHT, window.innerHeight - 20);
+    return {
+      x: Math.max(12, window.innerWidth - width - 20),
+      y: Math.max(12, Math.round((window.innerHeight - height) / 2)),
+      width,
+      height,
+    };
+  }
+
+  function applyPanelGeometry() {
+    const panel = els.casePanel;
+    if (!panel) return;
+
+    panel.style.removeProperty('--panel-x');
+    panel.style.removeProperty('--panel-y');
+    panel.style.removeProperty('--panel-w');
+    panel.style.removeProperty('--panel-h');
+
+    if (panelState.layout === 'floating') {
+      panel.style.setProperty('--panel-x', `${panelState.x}px`);
+      panel.style.setProperty('--panel-y', `${panelState.y}px`);
+      panel.style.setProperty('--panel-w', `${panelState.width}px`);
+      panel.style.setProperty('--panel-h', `${panelState.height}px`);
+    }
+  }
+
+  function updatePanelControlStates() {
+    const isHidden = panelState.mode === 'hidden';
+    const isCollapsed = panelState.mode === 'collapsed';
+    const isDocked = !isHidden && panelState.layout === 'docked';
+    const isFloating = !isHidden && panelState.layout === 'floating';
+
+    els.casePanelDock?.classList.toggle('is-active', isDocked);
+    els.casePanelFloat?.classList.toggle('is-active', isFloating);
+    els.casePanelCollapse?.classList.toggle('is-active', isCollapsed);
+  }
+
+  function applyPanelState() {
+    const panel = els.casePanel;
+    if (!panel) return;
+
+    const isHidden = panelState.mode === 'hidden';
+    const isCollapsed = panelState.mode === 'collapsed';
+    const isFloating = panelState.layout === 'floating';
+
+    panel.classList.toggle('is-hidden', isHidden);
+    panel.classList.toggle('is-collapsed', isCollapsed);
+    panel.classList.toggle('is-docked', !isFloating);
+    panel.classList.toggle('is-floating', isFloating);
+
+    if (els.casePanelReveal) {
+      els.casePanelReveal.hidden = !isHidden;
+    }
+
+    applyPanelGeometry();
+    updatePanelControlStates();
+    writePanelMode();
+    writePanelPosition();
+  }
+
+  function setPanelMode(mode, { persist = true } = {}) {
+    if (mode !== 'hidden') {
+      panelState.lastVisibleMode = mode;
+    }
+    panelState.mode = mode;
+    if (persist) applyPanelState();
+  }
+
+  function setPanelLayout(layout) {
+    panelState.layout = layout;
+    if (layout === 'docked') {
+      panelState.width = PANEL_DOCKED_WIDTH;
+      panelState.height = window.innerHeight;
+    } else {
+      const saved = readPanelPosition();
+      if (saved?.x != null && saved?.y != null) {
+        panelState.x = saved.x;
+        panelState.y = saved.y;
+        panelState.width = clampPanel(saved.width, PANEL_MIN_WIDTH, PANEL_MAX_WIDTH);
+        panelState.height = clampPanel(saved.height, PANEL_MIN_HEIGHT, window.innerHeight - 20);
+      } else {
+        const defaults = defaultFloatingPosition();
+        panelState.x = defaults.x;
+        panelState.y = defaults.y;
+        panelState.width = defaults.width;
+        panelState.height = defaults.height;
+      }
+    }
+  }
+
+  function dockPanel() {
+    panelState.layout = 'docked';
+    panelState.width = PANEL_DOCKED_WIDTH;
+    panelState.height = window.innerHeight;
+    if (panelState.mode === 'collapsed') {
+      setPanelMode('collapsed');
+    } else {
+      setPanelMode('docked');
+    }
+  }
+
+  function floatPanel() {
+    setPanelLayout('floating');
+    if (panelState.mode === 'collapsed') {
+      setPanelMode('collapsed');
+    } else {
+      setPanelMode('floating');
+    }
   }
 
   function togglePanelCollapsed() {
-    const collapsed = !els.casePanel?.classList.contains('is-collapsed');
-    setPanelCollapsed(collapsed);
+    if (panelState.mode === 'collapsed') {
+      setPanelMode(panelState.layout === 'floating' ? 'floating' : 'docked');
+      return;
+    }
+    if (panelState.mode === 'hidden') return;
+    setPanelMode('collapsed');
   }
 
-  function restorePanelCollapsed() {
-    const collapsed = localStorage.getItem(PANEL_COLLAPSED_KEY) === '1';
-    setPanelCollapsed(collapsed);
+  function hidePanel() {
+    if (panelState.mode !== 'hidden') {
+      panelState.lastVisibleMode = panelState.mode;
+    }
+    setPanelMode('hidden');
+  }
+
+  function revealPanel() {
+    const saved = readPanelPosition();
+    const restore = saved?.lastVisibleMode || panelState.lastVisibleMode || 'docked';
+
+    if (restore === 'floating' || (restore === 'collapsed' && saved?.x != null && saved?.y != null)) {
+      setPanelLayout('floating');
+    } else {
+      setPanelLayout('docked');
+    }
+
+    setPanelMode(restore === 'hidden' ? 'docked' : restore);
+  }
+
+  function restorePanelState() {
+    const legacyCollapsed = localStorage.getItem('panel_collapsed') === '1';
+    let mode = localStorage.getItem(PANEL_MODE_KEY) || 'docked';
+    const saved = readPanelPosition();
+
+    if (!localStorage.getItem(PANEL_MODE_KEY) && legacyCollapsed) {
+      mode = 'collapsed';
+    }
+
+    panelState.layout = 'docked';
+    panelState.width = PANEL_DOCKED_WIDTH;
+    panelState.height = window.innerHeight;
+
+    const useFloatingLayout = mode === 'floating'
+      || (mode === 'collapsed' && saved?.x != null && saved?.y != null);
+
+    if (useFloatingLayout) {
+      panelState.layout = 'floating';
+      if (saved?.x != null && saved?.y != null) {
+        panelState.x = clampPanel(saved.x, 0, Math.max(0, window.innerWidth - PANEL_MIN_WIDTH));
+        panelState.y = clampPanel(saved.y, 0, Math.max(0, window.innerHeight - PANEL_HEADER_HEIGHT));
+        panelState.width = clampPanel(saved.width, PANEL_MIN_WIDTH, PANEL_MAX_WIDTH);
+        panelState.height = clampPanel(saved.height, PANEL_MIN_HEIGHT, window.innerHeight - 20);
+      } else {
+        const defaults = defaultFloatingPosition();
+        panelState.x = defaults.x;
+        panelState.y = defaults.y;
+        panelState.width = defaults.width;
+        panelState.height = defaults.height;
+      }
+    }
+
+    if (saved?.lastVisibleMode) {
+      panelState.lastVisibleMode = saved.lastVisibleMode;
+    } else if (mode !== 'hidden') {
+      panelState.lastVisibleMode = mode;
+    }
+
+    panelState.mode = mode;
+    applyPanelState();
+  }
+
+  function onPanelDragMove(event) {
+    if (!panelState.drag) return;
+    const dx = event.clientX - panelState.drag.startX;
+    const dy = event.clientY - panelState.drag.startY;
+    const maxX = Math.max(0, window.innerWidth - panelState.width);
+    const maxY = Math.max(0, window.innerHeight - PANEL_HEADER_HEIGHT);
+    panelState.x = clampPanel(panelState.drag.originX + dx, 0, maxX);
+    panelState.y = clampPanel(panelState.drag.originY + dy, 0, maxY);
+    applyPanelGeometry();
+  }
+
+  function stopPanelDrag() {
+    if (!panelState.drag) return;
+    panelState.drag = null;
+    els.casePanel?.classList.remove('is-dragging');
+    document.removeEventListener('pointermove', onPanelDragMove);
+    document.removeEventListener('pointerup', stopPanelDrag);
+    writePanelPosition();
+  }
+
+  function startPanelDrag(event) {
+    if (panelState.layout !== 'floating' || panelState.mode === 'hidden') return;
+    if (event.target.closest('.case-panel-controls, .case-panel-refresh')) return;
+    if (event.button !== 0) return;
+
+    panelState.drag = {
+      startX: event.clientX,
+      startY: event.clientY,
+      originX: panelState.x,
+      originY: panelState.y,
+    };
+    els.casePanel?.classList.add('is-dragging');
+    document.addEventListener('pointermove', onPanelDragMove);
+    document.addEventListener('pointerup', stopPanelDrag);
+    event.preventDefault();
+  }
+
+  function onPanelResizeMove(event) {
+    if (!panelState.resize) return;
+    const dx = event.clientX - panelState.resize.startX;
+    const dy = event.clientY - panelState.resize.startY;
+    panelState.width = clampPanel(
+      panelState.resize.originW + dx,
+      PANEL_MIN_WIDTH,
+      PANEL_MAX_WIDTH,
+    );
+    panelState.height = clampPanel(
+      panelState.resize.originH + dy,
+      PANEL_MIN_HEIGHT,
+      window.innerHeight - panelState.y,
+    );
+    applyPanelGeometry();
+  }
+
+  function stopPanelResize() {
+    if (!panelState.resize) return;
+    panelState.resize = null;
+    document.removeEventListener('pointermove', onPanelResizeMove);
+    document.removeEventListener('pointerup', stopPanelResize);
+    writePanelPosition();
+  }
+
+  function startPanelResize(event) {
+    if (panelState.layout !== 'floating' || panelState.mode === 'collapsed' || panelState.mode === 'hidden') return;
+    if (event.button !== 0) return;
+
+    panelState.resize = {
+      startX: event.clientX,
+      startY: event.clientY,
+      originW: panelState.width,
+      originH: panelState.height,
+    };
+    document.addEventListener('pointermove', onPanelResizeMove);
+    document.addEventListener('pointerup', stopPanelResize);
+    event.preventDefault();
+    event.stopPropagation();
   }
 
   function wireCasePanel() {
-    els.casePanelToggle?.addEventListener('click', togglePanelCollapsed);
+    els.casePanelDock?.addEventListener('click', (event) => {
+      event.stopPropagation();
+      dockPanel();
+    });
+    els.casePanelFloat?.addEventListener('click', (event) => {
+      event.stopPropagation();
+      floatPanel();
+    });
+    els.casePanelCollapse?.addEventListener('click', (event) => {
+      event.stopPropagation();
+      togglePanelCollapsed();
+    });
+    els.casePanelHide?.addEventListener('click', (event) => {
+      event.stopPropagation();
+      hidePanel();
+    });
+    els.casePanelReveal?.addEventListener('click', revealPanel);
+    els.casePanelHeader?.addEventListener('pointerdown', startPanelDrag);
+    els.casePanelResize?.addEventListener('pointerdown', startPanelResize);
     els.casePanelRefresh?.addEventListener('click', (event) => {
       event.stopPropagation();
       resetCase(false);
     });
-    restorePanelCollapsed();
+
+    window.addEventListener('resize', () => {
+      if (panelState.layout === 'docked' && panelState.mode !== 'hidden') {
+        panelState.height = window.innerHeight;
+        applyPanelGeometry();
+        writePanelPosition();
+      } else if (panelState.layout === 'floating') {
+        const maxX = Math.max(0, window.innerWidth - panelState.width);
+        const maxY = Math.max(0, window.innerHeight - PANEL_HEADER_HEIGHT);
+        panelState.x = clampPanel(panelState.x, 0, maxX);
+        panelState.y = clampPanel(panelState.y, 0, maxY);
+        panelState.height = clampPanel(panelState.height, PANEL_MIN_HEIGHT, window.innerHeight - panelState.y);
+        applyPanelGeometry();
+        writePanelPosition();
+      }
+    });
+
+    restorePanelState();
+  }
+
+  function wireAudioUnlock() {
+    const unlock = () => {
+      unlockAudio();
+    };
+
+    ['pointerdown', 'keydown', 'touchstart'].forEach((eventName) => {
+      document.addEventListener(eventName, unlock, { passive: true });
+    });
+
+    document.getElementById('case-selector')?.addEventListener('change', unlock);
   }
 
   function wireToolbar() {
+    document.querySelectorAll('.toolbar-btn[title="Vitals"]').forEach((btn) => {
+      btn.addEventListener('click', unlockAudio);
+    });
+
     document.querySelectorAll('.toolbar-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const action = btn.dataset.action;
@@ -624,6 +1026,9 @@
 
   function init() {
     initAudio();
+    wireAudioUnlock();
+    wireAudioStartOverlay();
+    tryAutoUnlockAudio();
     els.deathVideo.muted = true;
     els.deathVideo.playsInline = true;
     els.deathVideo.addEventListener('ended', holdDeathLastFrame);
@@ -633,15 +1038,20 @@
     window.addEventListener('cases-ready', (event) => {
       applyCaseData(event.detail);
       gameStarted = true;
+      tryAutoUnlockAudio().then(() => {
+        if (!audioUnlocked) showAudioStartOverlay();
+      });
     });
 
     window.addEventListener('case-loaded', (event) => {
       if (!gameStarted) return;
       applyCaseData(event.detail);
       window.ClinicalChat?.onCaseChanged?.();
+      tryAutoUnlockAudio();
     });
 
-    document.body.addEventListener('pointerdown', resumeAudio, { once: true });
+    // Browsers block audio until a user gesture — unlock on first interaction anywhere.
+    document.body.addEventListener('pointerdown', unlockAudio, { once: true });
   }
 
   if (document.readyState === 'loading') {
