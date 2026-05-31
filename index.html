@@ -3,11 +3,121 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clinical Scene</title>
+  <title>Clinical Scene — Case 143</title>
   <link rel="stylesheet" href="assets/css/scene.css" />
 </head>
 <body>
   <div class="timer" id="timer" aria-live="polite">5:00</div>
+
+  <aside class="chat-panel" id="chat-panel" aria-label="Patient chat">
+    <header class="chat-header">
+      <span class="chat-case-label">CASE 143 — POOR FEEDING</span>
+    </header>
+    <div class="chat-separator" aria-hidden="true"></div>
+    <div class="chat-messages" id="chat-messages" role="log" aria-live="polite"></div>
+    <div class="chat-typing" id="chat-typing" aria-hidden="true">Patient is responding…</div>
+    <form class="chat-input-bar" id="chat-form">
+      <input
+        type="text"
+        id="chat-input"
+        class="chat-input"
+        placeholder="Ask the patient..."
+        autocomplete="off"
+        aria-label="Message to patient"
+      />
+      <button type="submit" class="chat-send" aria-label="Send message">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12l14 0" />
+          <path d="M13 18l6 -6" />
+          <path d="M13 6l6 6" />
+        </svg>
+      </button>
+    </form>
+  </aside>
+
+  <aside class="case-panel" id="case-panel" aria-label="Case panel">
+    <button type="button" class="case-panel-header" id="case-panel-toggle" aria-expanded="true" aria-controls="case-panel-body">
+      <span class="case-panel-title">:: SCHOONMAKER</span>
+      <span class="case-panel-header-actions">
+        <span class="case-panel-refresh" id="case-panel-refresh" title="Restart case" aria-label="Restart case">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M19.95 11a8 8 0 1 0 -.5 4m.5 5v-5h-5" />
+          </svg>
+        </span>
+        <span class="case-panel-chevron" title="Collapse panel" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 6l6 6l-6 6" />
+          </svg>
+        </span>
+      </span>
+    </button>
+    <div class="case-panel-body" id="case-panel-body">
+      <div class="patient-life-block">
+        <span class="patient-life-label">PATIENT LIFE</span>
+        <div class="patient-life-bar" aria-hidden="true">
+          <div class="patient-life-fill" id="patient-life-fill"></div>
+        </div>
+      </div>
+      <div class="monitor-unit">
+        <div class="monitor-status" id="monitor-status">GUARDED</div>
+        <div class="monitor-row">
+          <div class="monitor-cell">
+            <span class="monitor-label">HR</span>
+            <span class="monitor-value" id="mon-hr">128</span>
+          </div>
+          <div class="monitor-cell">
+            <span class="monitor-label">SpO₂</span>
+            <span class="monitor-value" id="mon-spo2">95%</span>
+          </div>
+          <div class="monitor-cell">
+            <span class="monitor-label">NIBP</span>
+            <span class="monitor-value" id="mon-nibp">96/58</span>
+          </div>
+        </div>
+        <div class="monitor-row">
+          <div class="monitor-cell">
+            <span class="monitor-label">RR</span>
+            <span class="monitor-value" id="mon-rr">28</span>
+          </div>
+          <div class="monitor-cell">
+            <span class="monitor-label">TEMP</span>
+            <span class="monitor-value" id="mon-temp">39.0°C</span>
+          </div>
+          <div class="monitor-cell">
+            <span class="monitor-label">MAP</span>
+            <span class="monitor-value" id="mon-map">71</span>
+          </div>
+        </div>
+        <div class="monitor-row monitor-row--single">
+          <div class="monitor-cell monitor-cell--wide">
+            <span class="monitor-label">LACTATE</span>
+            <span class="monitor-value" id="mon-lactate">2.5</span>
+          </div>
+        </div>
+        <div class="monitor-pathway" id="monitor-pathway">Standard ED pathway</div>
+        <div class="monitor-orders" id="monitor-orders">Orders placed: 0/5</div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="scene-hud-vitals" aria-label="Live vitals">
+    <div class="hud-vital">
+      <span class="hud-vital-label">HR</span>
+      <span class="hud-vital-value" id="vital-hr">128</span>
+    </div>
+    <div class="hud-vital">
+      <span class="hud-vital-label">SpO₂</span>
+      <span class="hud-vital-value" id="vital-spo2">95%</span>
+    </div>
+    <div class="hud-vital">
+      <span class="hud-vital-label">NIBP</span>
+      <span class="hud-vital-value" id="vital-nibp">96/58</span>
+    </div>
+    <div class="hud-vital">
+      <span class="hud-vital-label">RR</span>
+      <span class="hud-vital-value" id="vital-rr">28</span>
+    </div>
+  </div>
 
   <main class="scene">
     <div class="scene-stage" aria-label="Clinical scene">
@@ -15,25 +125,6 @@
         <video id="active" class="idle-slot is-front" muted playsinline preload="auto"></video>
         <video id="next" class="idle-slot is-back" muted playsinline preload="auto"></video>
         <video id="death" src="assets/video/death.mp4" muted playsinline preload="auto"></video>
-      </div>
-
-      <div class="vitals-strip" aria-label="Patient vitals">
-        <div class="vital">
-          <span class="vital-label">HR</span>
-          <span class="vital-value" id="vital-hr">98</span>
-        </div>
-        <div class="vital">
-          <span class="vital-label">SpO₂</span>
-          <span class="vital-value" id="vital-spo2">96%</span>
-        </div>
-        <div class="vital">
-          <span class="vital-label">NIBP</span>
-          <span class="vital-value" id="vital-nibp">142/88</span>
-        </div>
-        <div class="vital">
-          <span class="vital-label">RR</span>
-          <span class="vital-value" id="vital-rr">18</span>
-        </div>
       </div>
 
       <div class="orders-rail" id="orders-rail" aria-label="Treatment orders"></div>
@@ -96,7 +187,7 @@
       </svg>
     </button>
     <span class="toolbar-sep" aria-hidden="true"></span>
-    <button type="button" class="toolbar-btn" title="Chat" aria-label="Chat">
+    <button type="button" class="toolbar-btn" data-action="toggle-chat" title="Chat" aria-label="Chat">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M8 9h8" />
         <path d="M8 13h6" />
@@ -143,5 +234,6 @@
   </nav>
 
   <script src="assets/js/scene.js"></script>
+  <script src="assets/js/chat.js"></script>
 </body>
 </html>

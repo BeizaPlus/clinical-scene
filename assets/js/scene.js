@@ -9,8 +9,12 @@
 
   const DEATH_VIDEO = 'assets/video/death.mp4';
   const IDLE_CROSSFADE_MS = 800;
+  const CASE_ID = '143';
+  const PATHWAY_LABEL = 'Standard ED pathway';
+  const PANEL_COLLAPSED_KEY = 'panel_collapsed';
 
-  const TOTAL_ORDERS = 5;
+  const START_VITALS = { hr: 128, spo2: 95, sbp: 96, dbp: 58, rr: 28, temp: 39, lactate: 2.5 };
+  const NORMAL = { hr: 88, spo2: 98, sbp: 118, dbp: 72, rr: 16, temp: 37, lactate: 1.2 };
   const TIMER_START_SEC = 5 * 60;
   const DRIFT_MS = 10_000;
   const TREATMENT_PAUSE_MS = 8_000;
@@ -24,14 +28,14 @@
     'Broad-Spectrum Abx',
   ];
 
-  const NORMAL = { hr: 88, spo2: 98, sbp: 118, dbp: 72, rr: 16 };
+  const TOTAL_ORDERS = 5;
 
   const state = {
     phase: 'playing',
     secondsLeft: TIMER_START_SEC,
     driftPausedUntil: 0,
     placedCount: 0,
-    vitals: { hr: 98, spo2: 96, sbp: 142, dbp: 88, rr: 18 },
+    vitals: { ...START_VITALS },
     intervals: { timer: null, drift: null, beep: null },
     dragging: null,
     ghost: null,
@@ -55,6 +59,22 @@
       nibp: document.getElementById('vital-nibp'),
       rr: document.getElementById('vital-rr'),
     },
+    monitor: {
+      hr: document.getElementById('mon-hr'),
+      spo2: document.getElementById('mon-spo2'),
+      nibp: document.getElementById('mon-nibp'),
+      rr: document.getElementById('mon-rr'),
+      temp: document.getElementById('mon-temp'),
+      map: document.getElementById('mon-map'),
+      lactate: document.getElementById('mon-lactate'),
+      orders: document.getElementById('monitor-orders'),
+      pathway: document.getElementById('monitor-pathway'),
+      status: document.getElementById('monitor-status'),
+    },
+    patientLifeFill: document.getElementById('patient-life-fill'),
+    casePanel: document.getElementById('case-panel'),
+    casePanelToggle: document.getElementById('case-panel-toggle'),
+    casePanelRefresh: document.getElementById('case-panel-refresh'),
   };
 
   let frontSlot = els.activeSlot;
@@ -178,6 +198,10 @@
     }
   }
 
+  function calcMap(sbp, dbp) {
+    return Math.round(dbp + (sbp - dbp) / 3);
+  }
+
   function flashVital(el) {
     if (!el) return;
     el.classList.remove('flash');
@@ -198,16 +222,47 @@
   }
 
   function renderVitals() {
-    const { hr, spo2, sbp, dbp, rr } = state.vitals;
+    const { hr, spo2, sbp, dbp, rr, temp, lactate } = state.vitals;
+    const map = calcMap(sbp, dbp);
+    const hrClass = vitalClassHr(hr);
+    const spo2Class = vitalClassSpo2(spo2);
+
     els.vitals.hr.textContent = String(Math.round(hr));
     els.vitals.spo2.textContent = `${Math.round(spo2)}%`;
     els.vitals.nibp.textContent = `${Math.round(sbp)}/${Math.round(dbp)}`;
     els.vitals.rr.textContent = String(Math.round(rr));
 
-    els.vitals.hr.className = `vital-value ${vitalClassHr(hr)}`;
-    els.vitals.spo2.className = `vital-value ${vitalClassSpo2(spo2)}`;
-    els.vitals.nibp.className = 'vital-value';
-    els.vitals.rr.className = 'vital-value';
+    els.vitals.hr.className = `hud-vital-value ${hrClass}`.trim();
+    els.vitals.spo2.className = `hud-vital-value ${spo2Class}`.trim();
+    els.vitals.nibp.className = 'hud-vital-value';
+    els.vitals.rr.className = 'hud-vital-value';
+
+    if (els.monitor.hr) {
+      els.monitor.hr.textContent = String(Math.round(hr));
+      els.monitor.hr.className = `monitor-value ${hrClass}`.trim();
+    }
+    if (els.monitor.spo2) {
+      els.monitor.spo2.textContent = `${Math.round(spo2)}%`;
+      els.monitor.spo2.className = `monitor-value ${spo2Class}`.trim();
+    }
+    if (els.monitor.nibp) els.monitor.nibp.textContent = `${Math.round(sbp)}/${Math.round(dbp)}`;
+    if (els.monitor.rr) els.monitor.rr.textContent = String(Math.round(rr));
+    if (els.monitor.temp) els.monitor.temp.textContent = `${temp.toFixed(1)}°C`;
+    if (els.monitor.map) els.monitor.map.textContent = String(map);
+    if (els.monitor.lactate) {
+      els.monitor.lactate.textContent = lactate.toFixed(1);
+      els.monitor.lactate.className = `monitor-value ${lactate >= 4 ? 'red' : lactate >= 2 ? 'amber' : ''}`.trim();
+    }
+    if (els.monitor.orders) {
+      els.monitor.orders.textContent = `Orders placed: ${state.placedCount}/${TOTAL_ORDERS}`;
+    }
+    if (els.monitor.pathway) els.monitor.pathway.textContent = PATHWAY_LABEL;
+  }
+
+  function updatePatientLife() {
+    if (!els.patientLifeFill) return;
+    const pct = clamp((state.secondsLeft / TIMER_START_SEC) * 100, 0, 100);
+    els.patientLifeFill.style.width = `${pct}%`;
   }
 
   function updateTimerDisplay() {
@@ -215,6 +270,7 @@
     els.timer.classList.remove('amber', 'red');
     if (state.secondsLeft <= 60) els.timer.classList.add('red');
     else if (state.secondsLeft <= 120) els.timer.classList.add('amber');
+    updatePatientLife();
   }
 
   function clearIntervals() {
@@ -310,6 +366,8 @@
     state.vitals.spo2 = clamp(state.vitals.spo2 - 1, 82, 100);
     state.vitals.sbp = clamp(state.vitals.sbp + 3, 0, 180);
     state.vitals.rr = clamp(state.vitals.rr + 1, 0, 34);
+    state.vitals.temp = clamp(state.vitals.temp + 0.1, 36, 41);
+    state.vitals.lactate = clamp(state.vitals.lactate + 0.1, 1, 8);
 
     renderVitals();
     if (prev.hr !== state.vitals.hr) flashVital(els.vitals.hr);
@@ -408,6 +466,7 @@
     state.driftPausedUntil = Date.now() + TREATMENT_PAUSE_MS;
 
     if (state.placedCount >= TOTAL_ORDERS) triggerWin();
+    renderVitals();
   }
 
   function triggerDeteriorationVideo() {
@@ -454,6 +513,9 @@
       state.vitals.spo2 = start.spo2 + (NORMAL.spo2 - start.spo2) * ease;
       state.vitals.sbp = start.sbp + (NORMAL.sbp - start.sbp) * ease;
       state.vitals.dbp = start.dbp + (NORMAL.dbp - start.dbp) * ease;
+      state.vitals.rr = start.rr + (NORMAL.rr - start.rr) * ease;
+      state.vitals.temp = start.temp + (NORMAL.temp - start.temp) * ease;
+      state.vitals.lactate = start.lactate + (NORMAL.lactate - start.lactate) * ease;
       renderVitals();
       if (t < 1) requestAnimationFrame(frame);
     }
@@ -476,7 +538,11 @@
     els.winOverlay.classList.remove('visible');
   }
 
-  function resetCase() {
+  function resetCase(skipChatPrompt = false) {
+    if (!skipChatPrompt && window.ClinicalChat?.confirmClearOnReset?.()) {
+      window.ClinicalChat.clearHistory();
+    }
+
     clearIntervals();
     hideOverlays();
     document.body.classList.remove('game-ended');
@@ -485,7 +551,7 @@
     state.secondsLeft = TIMER_START_SEC;
     state.driftPausedUntil = 0;
     state.placedCount = 0;
-    state.vitals = { hr: 98, spo2: 96, sbp: 142, dbp: 88, rr: 18 };
+    state.vitals = { ...START_VITALS };
 
     els.deathVideo.pause();
     els.deathVideo.currentTime = 0;
@@ -507,27 +573,55 @@
     startIdlePool();
   }
 
+  function setPanelCollapsed(collapsed) {
+    els.casePanel?.classList.toggle('is-collapsed', collapsed);
+    els.casePanelToggle?.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    localStorage.setItem(PANEL_COLLAPSED_KEY, collapsed ? '1' : '0');
+    const chevron = els.casePanel?.querySelector('.case-panel-chevron');
+    if (chevron) chevron.title = collapsed ? 'Expand panel' : 'Collapse panel';
+  }
+
+  function togglePanelCollapsed() {
+    const collapsed = !els.casePanel?.classList.contains('is-collapsed');
+    setPanelCollapsed(collapsed);
+  }
+
+  function restorePanelCollapsed() {
+    const collapsed = localStorage.getItem(PANEL_COLLAPSED_KEY) === '1';
+    setPanelCollapsed(collapsed);
+  }
+
+  function wireCasePanel() {
+    els.casePanelToggle?.addEventListener('click', togglePanelCollapsed);
+    els.casePanelRefresh?.addEventListener('click', (event) => {
+      event.stopPropagation();
+      resetCase(false);
+    });
+    restorePanelCollapsed();
+  }
+
   function wireToolbar() {
     document.querySelectorAll('.toolbar-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const action = btn.dataset.action;
         if (action === 'restart') {
-          resetCase();
+          resetCase(false);
           return;
         }
         if (action === 'trigger-death') {
           manualTriggerDeath();
           return;
         }
+        if (action === 'toggle-chat') return;
         btn.classList.toggle('active');
       });
     });
 
-    document.getElementById('btn-try-again')?.addEventListener('click', resetCase);
+    document.getElementById('btn-try-again')?.addEventListener('click', () => resetCase(false));
     document.getElementById('btn-review')?.addEventListener('click', () => {
       els.loseOverlay.classList.remove('visible');
     });
-    document.getElementById('btn-win-dismiss')?.addEventListener('click', resetCase);
+    document.getElementById('btn-win-dismiss')?.addEventListener('click', () => resetCase(false));
   }
 
   function init() {
@@ -537,6 +631,7 @@
     updateTimerDisplay();
     renderVitals();
     wireToolbar();
+    wireCasePanel();
 
     document.body.addEventListener('pointerdown', resumeAudio, { once: true });
 
